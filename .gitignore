@@ -1,0 +1,50 @@
+# Dependencies
+node_modules/
+
+# Production builds
+dist/
+build/
+
+# Environment files and secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Coverage and test artifacts
+coverage/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor settings
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Local databases and uploaded files
+*.sqlite
+*.sqlite3
+uploads/
+
+# Backend runtime artifacts
+*.pid
+*.seed
+
+# Optional local configuration
+*.local
+
+# Vite cache
+.vite/
