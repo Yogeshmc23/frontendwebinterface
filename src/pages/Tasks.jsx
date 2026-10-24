@@ -58,7 +58,7 @@ export default function Tasks() {
 
   const handleMove = (task, nextStatus) => {
     setTasks((prev) => prev.map((t) => (t.id === task.id ? { ...t, status: nextStatus } : t)))
-    setToast(`Moved “${task.title}” → ${nextStatus}`)
+    setToast(`Moved “${task.title}”  to  ${nextStatus}`)
     setTimeout(() => setToast(''), 2000)
   }
 
@@ -121,10 +121,10 @@ export default function Tasks() {
       <div className="page-header">
         <div>
           <h1 className="page-title">Task Board</h1>
-          <p className="page-subtitle">Kanban view with search, filters, sorting & pagination • <span className="badge badge-info">Demo CRUD — replace with tasksService</span></p>
+          <p className="page-subtitle">Kanban view with search, filters, sorting & pagination • <span className="badge badge-info">Demo CRUD replace with tasksService</span></p>
         </div>
         <div className="cluster">
-          <div className="cluster" style={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 999, padding: 4 }}>
+          <div className="cluster" style={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 4, padding: 4 }}>
             <button className={`btn btn-sm ${view === 'board' ? 'btn-primary' : 'btn-ghost'}`} onClick={() => setView('board')}>Board</button>
             <button className={`btn btn-sm ${view === 'list' ? 'btn-primary' : 'btn-ghost'}`} onClick={() => setView('list')}>List</button>
           </div>
@@ -155,10 +155,10 @@ export default function Tasks() {
         </div>
       </div>
 
-      {toast && <div role="status" style={{ background: 'var(--color-success-soft)', border: '1px solid #A7F3D0', color: '#065F46', padding: '10px 12px', borderRadius: 12, fontSize: 13 }}>{toast}</div>}
+      {toast && <div role="status" style={{ background: 'var(--color-success-soft)', border: '1px solid #A7F3D0', color: '#065F46', padding: '10px 12px', borderRadius: 'var(--radius-md)', fontSize: 13 }}>{toast}</div>}
 
       {filtered.length === 0 ? (
-        <EmptyState icon="☰" title="No tasks found" description="Adjust filters or create a new task. In production this fetches GET /tasks with query params." action={<button className="btn btn-primary" onClick={openCreate}>Create task</button>} />
+        <EmptyState icon="tasks" title="No tasks found" description="Adjust filters or create a new task. In production this fetches GET /tasks with query params." action={<button className="btn btn-primary" onClick={openCreate}>Create task</button>} />
       ) : view === 'board' ? (
         <>
           <div className="kanban" role="region" aria-label="Kanban board">
@@ -166,7 +166,7 @@ export default function Tasks() {
               <div key={col} className="kanban-col">
                 <div className="kanban-col-head">
                   <div className="kanban-col-title">
-                    <span style={{ width: 8, height: 8, borderRadius: 999, background: col === 'Done' ? 'var(--color-success)' : col === 'In Progress' ? 'var(--color-info)' : col === 'Review' ? 'var(--color-warning)' : 'var(--color-border-strong)' }} />
+                    <span style={{ width: 8, height: 8, borderRadius: 4, background: col === 'Done' ? 'var(--color-success)' : col === 'In Progress' ? 'var(--color-info)' : col === 'Review' ? 'var(--color-warning)' : 'var(--color-border-strong)' }} />
                     {col}
                   </div>
                   <span className="count-pill">{grouped[col].length}</span>
@@ -291,7 +291,7 @@ export default function Tasks() {
               <input id="t-assignee" className="input" value={form.assignee} onChange={(e) => setForm({ ...form, assignee: e.target.value })} placeholder="Alex Morgan" />
             </div>
           </div>
-          <div style={{ background: 'var(--color-info-soft)', border: '1px solid #BAE6FD', borderRadius: 12, padding: 10, fontSize: 12, color: '#075985' }}>
+          <div style={{ background: 'var(--color-info-soft)', border: '1px solid #BAE6FD', borderRadius: 'var(--radius-md)', padding: 10, fontSize: 12, color: '#075985' }}>
             Backend: <code>POST /tasks</code> / <code>PUT /tasks/:id</code> via <code>tasksService</code>. Demo mode persists in memory only.
           </div>
         </form>

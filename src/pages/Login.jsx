@@ -41,7 +41,7 @@ export default function Login() {
       </div>
 
       {serverError && (
-        <div role="alert" style={{ background: 'var(--color-danger-soft)', border: '1px solid #FECACA', color: '#991B1B', padding: '10px 12px', borderRadius: 12, fontSize: 13 }}>{serverError}</div>
+        <div role="alert" style={{ background: 'var(--color-danger-soft)', border: '1px solid #FECACA', color: '#991B1B', padding: '10px 12px', borderRadius: 'var(--radius-md)', fontSize: 13 }}>{serverError}</div>
       )}
 
       <form onSubmit={onSubmit} noValidate style={{ display: 'grid', gap: 14 }}>
@@ -72,10 +72,10 @@ export default function Login() {
         </div>
 
         <button className="btn btn-primary btn-block btn-lg" type="submit" disabled={loading}>
-          {loading ? 'Signing in…' : 'Sign in →'}
+          {loading ? 'Signing in…' : 'Sign in'}
         </button>
 
-        <div className="surface" style={{ padding: 12, borderRadius: 12, fontSize: 12, color: 'var(--color-text-3)', lineHeight: 1.6 }}>
+        <div className="surface" style={{ padding: 12, borderRadius: 'var(--radius-md)', fontSize: 12, color: 'var(--color-text-3)', lineHeight: 1.6 }}>
           <strong style={{ color: 'var(--color-text-2)' }}>MERN integration note:</strong> This demo stores auth locally. With a real backend, replace <code>login()</code> in <code>src/context/AuthContext.jsx</code> with <code>authService.login()</code> from <code>src/services/api.js</code> which calls <code>POST /auth/login</code> and expects an <code>httpOnly</code> cookie or token.
         </div>
 

@@ -39,7 +39,7 @@ export default function Signup() {
         <p className="muted" style={{ margin: 0, fontSize: 13, lineHeight: 1.6 }}>Free to start. Invite your team after signup. <span className="badge badge-success">No backend required for demo</span></p>
       </div>
 
-      {serverError && <div role="alert" style={{ background: 'var(--color-danger-soft)', border: '1px solid #FECACA', color: '#991B1B', padding: '10px 12px', borderRadius: 12, fontSize: 13 }}>{serverError}</div>}
+      {serverError && <div role="alert" style={{ background: 'var(--color-danger-soft)', border: '1px solid #FECACA', color: '#991B1B', padding: '10px 12px', borderRadius: 'var(--radius-md)', fontSize: 13 }}>{serverError}</div>}
 
       <form onSubmit={onSubmit} noValidate style={{ display: 'grid', gap: 14 }}>
         <div className="field">
@@ -76,7 +76,7 @@ export default function Signup() {
         </label>
         {errors.agree && <span className="error-text" style={{ marginTop: -8 }}>{errors.agree}</span>}
 
-        <button className="btn btn-primary btn-block btn-lg" type="submit" disabled={loading}>{loading ? 'Creating account…' : 'Create account →'}</button>
+        <button className="btn btn-primary btn-block btn-lg" type="submit" disabled={loading}>{loading ? 'Creating account…' : 'Create account'}</button>
 
         <p className="small text-center" style={{ margin: 0 }}>Already have an account? <Link to="/login" style={{ color: 'var(--color-primary)', fontWeight: 700 }}>Sign in</Link></p>
       </form>

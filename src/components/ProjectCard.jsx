@@ -20,8 +20,8 @@ export default function ProjectCard({ project, onEdit, onDelete }) {
         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: 'var(--color-text-3)', fontWeight: 600 }}>
           <span>Progress</span><span>{project.progress}%</span>
         </div>
-        <div style={{ height: 8, borderRadius: 999, background: 'var(--color-surface-2)', border: '1px solid var(--color-border)', overflow: 'hidden', marginTop: 6 }}>
-          <div style={{ width: `${project.progress}%`, height: '100%', background: 'linear-gradient(90deg, var(--color-primary), #7C3AED)', borderRadius: 999 }} />
+        <div style={{ height: 8, borderRadius: 4, background: 'var(--color-surface-2)', border: '1px solid var(--color-border)', overflow: 'hidden', marginTop: 6 }}>
+          <div style={{ width: `${project.progress}%`, height: '100%', background: 'var(--color-primary)', borderRadius: 4 }} />
         </div>
       </div>
 

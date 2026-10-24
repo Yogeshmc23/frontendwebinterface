@@ -22,9 +22,9 @@ export default function Profile() {
       <div className="page-header">
         <div>
           <h1 className="page-title">Profile</h1>
-          <p className="page-subtitle">Manage your personal information. Demo saves locally — wire to <code>PUT /users/me</code> for persistence.</p>
+          <p className="page-subtitle">Manage your personal information. Demo saves locally wire to <code>PUT /users/me</code> for persistence.</p>
         </div>
-        {saved && <span className="badge badge-success">Saved ✓</span>}
+        {saved && <span className="badge badge-success">Saved</span>}
       </div>
 
       <div className="detail-grid">

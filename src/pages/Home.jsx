@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { Icon } from '../components/Icon.jsx'
 
 export default function Home() {
   return (
@@ -7,69 +8,79 @@ export default function Home() {
         <div className="container">
           <div className="hero-grid">
             <div>
-              <span className="hero-eyebrow">✦ New — TaskFlow is MERN-ready with Vite + Express API layer</span>
-              <h1 className="hero-title">Plan with clarity. <span>Deliver with momentum.</span></h1>
-              <p className="hero-lead">TaskFlow is a modern task & project hub for product teams — Kanban boards, project timelines, team workloads and progress analytics. A polished, responsive React frontend architected to plug into your Node.js + MongoDB backend.</p>
+              <span className="hero-eyebrow">TaskFlow for product teams</span>
+              <h1 className="hero-title">A task and project workspace for product teams</h1>
+              <p className="hero-lead">
+                TaskFlow lets you create projects, move tasks on a Kanban board, and track progress in one place. It replaces scattered sheets and chat threads with a clear structure for projects, priorities, due dates, and owners. The frontend is React with Vite and a single API layer ready for Node, Express, and MongoDB.
+              </p>
 
               <div className="hero-ctas">
-                <Link to="/signup" className="btn btn-primary btn-lg">Start free — create workspace</Link>
-                <Link to="/dashboard" className="btn btn-secondary btn-lg">View live demo →</Link>
+                <Link to="/signup" className="btn btn-primary btn-lg">Create account</Link>
+                <Link to="/dashboard" className="btn btn-secondary btn-lg">View dashboard demo</Link>
               </div>
 
               <div className="hero-proof">
-                <div className="avatar-stack" aria-hidden>
-                  <img src="https://i.pravatar.cc/100?img=1" alt="" />
-                  <img src="https://i.pravatar.cc/100?img=2" alt="" />
-                  <img src="https://i.pravatar.cc/100?img=3" alt="" />
-                  <img src="https://i.pravatar.cc/100?img=4" alt="" />
-                </div>
-                <span>Loved by <strong>2,400+</strong> teams • <strong>4.8/5</strong> average rating • No credit card required</span>
+                <span>Demo mode uses local sample data. Add your API URL in the environment file to connect a live backend.</span>
               </div>
 
-              <div className="stats-band" style={{ marginTop: 22 }}>
-                <div><div className="stat-num">96%</div><div className="stat-label">On-time delivery</div></div>
-                <div><div className="stat-num">42%</div><div className="stat-label">Faster cycle time</div></div>
-                <div><div className="stat-num">12k+</div><div className="stat-label">Tasks shipped</div></div>
-                <div><div className="stat-num">99.9%</div><div className="stat-label">Uptime (demo)</div></div>
+              <div className="info-band" style={{ marginTop: 16 }}>
+                <div className="info-band-item">
+                  <div className="info-band-label">Includes</div>
+                  <div className="info-band-value">Projects, Board, Dashboard</div>
+                  <div className="small muted">Search, filters, sorting, and pagination are included.</div>
+                </div>
+                <div className="info-band-item">
+                  <div className="info-band-label">Built with</div>
+                  <div className="info-band-value">React, Vite, Router</div>
+                  <div className="small muted">Axios service layer and Context for auth and theme.</div>
+                </div>
+                <div className="info-band-item">
+                  <div className="info-band-label">Integration</div>
+                  <div className="info-band-value">VITE_API_BASE_URL</div>
+                  <div className="small muted">Frontend never connects directly to MongoDB.</div>
+                </div>
               </div>
             </div>
 
-            <div className="hero-card" aria-label="Product preview">
+            <div className="hero-card" aria-label="Product preview project list">
               <div className="hero-card-header">
                 <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                   <span className="window-dots"><span></span><span></span><span></span></span>
-                  <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--color-text-2)' }}>Workspace — Q4 Roadmap</span>
+                  <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-text-2)' }}>Workspace Q4 Roadmap</span>
                 </div>
-                <span className="badge badge-success">Demo data</span>
+                <span className="badge badge-neutral">Sample data</span>
               </div>
               <div className="hero-board">
                 <div className="mini-stat">
-                  <div><div style={{ fontSize: 12, color: 'var(--color-text-3)', fontWeight: 600 }}>ACTIVE PROJECTS</div><div style={{ fontWeight: 800, fontSize: 20 }}>12</div></div>
-                  <span className="badge badge-primary">+3 this week</span>
+                  <div><div style={{ fontSize: 11, color: 'var(--color-text-3)', fontWeight: 600, letterSpacing: '.04em', textTransform: 'uppercase' }}>Active projects</div><div style={{ fontWeight: 700, fontSize: 18 }}>12</div></div>
+                  <span className="badge badge-primary">Demo</span>
                 </div>
                 <div style={{ display: 'grid', gap: 8 }}>
                   {[
-                    { name: 'Website Redesign', pct: 68, color: '#4F46E5' },
-                    { name: 'Mobile App — Phase 2', pct: 22, color: '#06B6D4' },
-                    { name: 'Q4 Campaign', pct: 54, color: '#10B981' },
+                    { name: 'Website Redesign', pct: 68 },
+                    { name: 'Mobile App Phase 2', pct: 22 },
+                    { name: 'Q4 Campaign', pct: 54 },
                   ].map((p) => (
-                    <div key={p.name} style={{ display: 'grid', gap: 6 }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, fontWeight: 600 }}><span>{p.name}</span><span style={{ color: 'var(--color-text-3)' }}>{p.pct}%</span></div>
+                    <div key={p.name} style={{ display: 'grid', gap: 5 }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12.5, fontWeight: 500 }}><span>{p.name}</span><span style={{ color: 'var(--color-text-3)' }}>{p.pct}%</span></div>
                       <div className="mini-bar"><span style={{ width: `${p.pct}%` }} /></div>
                     </div>
                   ))}
                 </div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-                  <div className="surface" style={{ padding: 12, borderRadius: 12 }}>
-                    <div style={{ fontSize: 11, letterSpacing: '.06em', color: 'var(--color-text-3)', fontWeight: 700 }}>OVERDUE</div>
-                    <div style={{ fontWeight: 800, fontSize: 18, color: 'var(--color-danger)' }}>5 tasks</div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+                  <div className="surface" style={{ padding: 10 }}>
+                    <div style={{ fontSize: 10, letterSpacing: '.05em', color: 'var(--color-text-3)', fontWeight: 600, textTransform: 'uppercase' }}>Overdue</div>
+                    <div style={{ fontWeight: 700, fontSize: 15 }}>5 tasks</div>
+                    <div className="small muted" style={{ fontSize: 11 }}>Sample count</div>
                   </div>
-                  <div className="surface" style={{ padding: 12, borderRadius: 12 }}>
-                    <div style={{ fontSize: 11, letterSpacing: '.06em', color: 'var(--color-text-3)', fontWeight: 700 }}>COMPLETED</div>
-                    <div style={{ fontWeight: 800, fontSize: 18, color: 'var(--color-success)' }}>26 this week</div>
+                  <div className="surface" style={{ padding: 10 }}>
+                    <div style={{ fontSize: 10, letterSpacing: '.05em', color: 'var(--color-text-3)', fontWeight: 600, textTransform: 'uppercase' }}>Completed</div>
+                    <div style={{ fontWeight: 700, fontSize: 15 }}>26 this week</div>
+                    <div className="small muted" style={{ fontSize: 11 }}>Sample count</div>
                   </div>
                 </div>
-                <Link to="/tasks" className="btn btn-primary btn-block">Open Kanban board →</Link>
+                <p className="small muted" style={{ margin: 0, fontSize: 11.5, lineHeight: 1.5 }}>This preview shows sample data from local state. It will show live data after you connect your API.</p>
+                <Link to="/tasks" className="btn btn-primary btn-block">Open board</Link>
               </div>
             </div>
           </div>
@@ -78,22 +89,22 @@ export default function Home() {
 
       <section className="section">
         <div className="container">
-          <div style={{ textAlign: 'center', maxWidth: 680, margin: '0 auto 22px' }}>
-            <h2 style={{ fontSize: 28, margin: 0 }}>Everything your team needs to stay in flow</h2>
-            <p className="muted" style={{ marginTop: 8 }}>Focused features, not bloat. A clean design system, reusable components, and an API layer ready for Express + MongoDB.</p>
+          <div style={{ maxWidth: 640, margin: '0 auto 20px' }}>
+            <h2 style={{ fontSize: 22, margin: 0 }}>What TaskFlow does</h2>
+            <p className="muted" style={{ marginTop: 8, fontSize: 13.5, lineHeight: 1.6 }}>Each feature maps to a real part of the product. There are no placeholder claims. If a backend is not connected, the interface shows sample data and notes the API route that will replace it.</p>
           </div>
 
           <div className="grid grid-3">
             {[
-              { icon: '▦', title: 'Project workspaces', desc: 'Create projects, set priorities, track progress with visual progress bars and due dates.' },
-              { icon: '◰', title: 'Kanban that moves with you', desc: 'Drag-free status updates (select-based for reliability) with search, filters, and pagination.' },
-              { icon: '◉', title: 'Team & ownership', desc: 'Assign owners, see workloads, and keep accountability clear without micromanaging.' },
-              { icon: '⚡', title: 'Dashboard analytics', desc: 'At-a-glance stats, recent tasks, overdue alerts, and activity feed — mock + API-ready.' },
-              { icon: '⚙', title: 'Auth-ready architecture', desc: 'Login, registration, protected routes, and httpOnly cookie auth pattern via VITE_API_BASE_URL.' },
-              { icon: '✦', title: 'Design system built-in', desc: 'CSS variables, responsive Grid/Flex, accessible forms, empty/loading/error states, and dark mode.' },
+              { icon: 'projects', title: 'Project workspaces', desc: 'Create a project with a name, description, priority, due date, and status. See progress as a percentage and open a detail page that lists its tasks.' },
+              { icon: 'tasks', title: 'Kanban board', desc: 'Tasks move between Todo, In Progress, Review, and Done using a select control. Search, filter by project and priority, sort, and paginate.' },
+              { icon: 'team', title: 'Ownership', desc: 'Each task has an assignee and project. Team page shows members and workload. No hidden assignment logic.' },
+              { icon: 'dashboard', title: 'Dashboard', desc: 'Shows project progress, overdue tasks, recent tasks table, and a sample activity list. Replace sample data with GET /stats/overview and GET /tasks.' },
+              { icon: 'profile', title: 'Authentication', desc: 'Login and registration pages validate input and show accessible errors. Protected routes redirect to login and restore the previous location after sign in.' },
+              { icon: 'settings', title: 'Design system', desc: 'CSS variables for colors, spacing, and borders. Thin borders, restrained radii, and accessible focus states. Light and dark themes.' },
             ].map((f) => (
               <div key={f.title} className="feature-card">
-                <div className="feature-icon" aria-hidden>{f.icon}</div>
+                <div className="feature-icon" aria-hidden><Icon name={f.icon} size={16} /></div>
                 <h3>{f.title}</h3>
                 <p>{f.desc}</p>
               </div>
@@ -104,18 +115,18 @@ export default function Home() {
 
       <section className="section-tight">
         <div className="container">
-          <div style={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 20, padding: 24, display: 'grid', gridTemplateColumns: '1.2fr .8fr', gap: 20, alignItems: 'center' }}>
+          <div style={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-lg)', padding: 20, display: 'grid', gridTemplateColumns: '1.2fr .8fr', gap: 18, alignItems: 'center' }}>
             <div>
-              <h3 style={{ margin: '0 0 8px', fontSize: 22 }}>A codebase you can extend with confidence</h3>
-              <p style={{ margin: 0, color: 'var(--color-text-2)', lineHeight: 1.7 }}>No Tailwind, no Bootstrap, no heavy libraries. Plain CSS + reusable components, React Router, Context for auth/theme, Axios service layer, and Vite. Replace mock data with your Express endpoints in <code style={{ background: 'var(--color-surface-2)', border: '1px solid var(--color-border)', padding: '2px 8px', borderRadius: 8 }}>src/services/api.js</code> and <code style={{ background: 'var(--color-surface-2)', border: '1px solid var(--color-border)', padding: '2px 8px', borderRadius: 8 }}>src/utils/mockData.js</code> is automatically bypassed.</p>
-              <div className="cluster" style={{ marginTop: 14 }}>
-                <span className="badge badge-primary">Clean structure</span>
+              <h3 style={{ margin: '0 0 8px', fontSize: 17 }}>A codebase you can extend with confidence</h3>
+              <p style={{ margin: 0, color: 'var(--color-text-2)', lineHeight: 1.6, fontSize: 13.5 }}>No Tailwind, no Bootstrap, no heavy libraries. Plain CSS with reusable components, React Router, Context for auth and theme, and an Axios service layer. Replace sample data with your Express endpoints in <code style={{ background: 'var(--color-surface-2)', border: '1px solid var(--color-border)', padding: '2px 6px', borderRadius: 'var(--radius-sm)', fontSize: 12 }}>src/services/api.js</code> and keep sample data in <code style={{ background: 'var(--color-surface-2)', border: '1px solid var(--color-border)', padding: '2px 6px', borderRadius: 'var(--radius-sm)', fontSize: 12 }}>src/utils/mockData.js</code> separate.</p>
+              <div className="cluster" style={{ marginTop: 12 }}>
+                <span className="badge badge-neutral">Clean structure</span>
                 <span className="badge badge-neutral">Accessible</span>
-                <span className="badge badge-neutral">Production build verified</span>
+                <span className="badge badge-neutral">Build verified</span>
               </div>
             </div>
-            <div className="surface" style={{ padding: 14, borderRadius: 14, display: 'grid', gap: 10 }}>
-              <div style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace', fontSize: 12, background: 'var(--color-surface-2)', border: '1px solid var(--color-border)', borderRadius: 10, padding: 12, lineHeight: 1.7 }}>
+            <div className="surface" style={{ padding: 12, display: 'grid', gap: 10 }}>
+              <div style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace', fontSize: 11.5, background: 'var(--color-surface-2)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', padding: 10, lineHeight: 1.7 }}>
                 <div><span style={{ color: 'var(--color-text-3)' }}># install</span></div>
                 <div>npm install</div>
                 <div><span style={{ color: 'var(--color-text-3)' }}># run dev server</span></div>
@@ -123,7 +134,7 @@ export default function Home() {
                 <div><span style={{ color: 'var(--color-text-3)' }}># env</span></div>
                 <div>VITE_API_BASE_URL=http://localhost:5000/api</div>
               </div>
-              <Link to="/help" className="btn btn-secondary btn-block">See integration guide →</Link>
+              <Link to="/help" className="btn btn-secondary btn-block">See integration guide</Link>
             </div>
           </div>
         </div>
@@ -131,41 +142,41 @@ export default function Home() {
 
       <section className="section">
         <div className="container">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 16, flexWrap: 'wrap', marginBottom: 16 }}>
-            <h2 style={{ margin: 0, fontSize: 24 }}>Simple, transparent pricing (demo)</h2>
-            <span className="badge badge-warning">Demo content — not a real checkout</span>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 16, flexWrap: 'wrap', marginBottom: 14 }}>
+            <h2 style={{ margin: 0, fontSize: 18 }}>How it connects to your backend</h2>
+            <span className="badge badge-neutral">No backend required for demo</span>
           </div>
-          <div className="pricing-grid">
-            {[
-              { name: 'Starter', price: 'Free', feat: ['Up to 3 projects', 'Kanban board', 'Community support'], cta: 'Start free', popular: false },
-              { name: 'Pro', price: '₹799', period: '/month', feat: ['Unlimited projects', 'Advanced analytics', 'Priority support', 'Custom roles'], cta: 'Choose Pro', popular: true },
-              { name: 'Team', price: '₹1,499', period: '/month', feat: ['Everything in Pro', 'SSO (backend)', 'Audit logs', 'Onboarding'], cta: 'Contact sales', popular: false },
-            ].map((tier) => (
-              <div key={tier.name} className={`pricing-card ${tier.popular ? 'featured' : ''}`}>
-                {tier.popular && <span className="pricing-popular">Most popular</span>}
-                <div style={{ fontWeight: 800 }}>{tier.name}</div>
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}><span style={{ fontSize: 30, fontWeight: 800 }}>{tier.price}</span>{tier.period && <span className="muted" style={{ fontSize: 13 }}>{tier.period}</span>}</div>
-                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 8, fontSize: 13, color: 'var(--color-text-2)' }}>
-                  {tier.feat.map((f) => <li key={f}>✓ {f}</li>)}
-                </ul>
-                <Link to="/signup" className={`btn ${tier.popular ? 'btn-primary' : 'btn-secondary'} btn-block`}>{tier.cta}</Link>
-              </div>
-            ))}
+          <div className="grid grid-3">
+            <div className="surface" style={{ padding: 16 }}>
+              <div style={{ fontWeight: 600, fontSize: 13, display: 'flex', gap: 8, alignItems: 'center' }}><Icon name="projects" size={14} /> Projects API</div>
+              <p className="small muted" style={{ marginTop: 6, lineHeight: 1.6 }}>GET /projects with search, status, priority, sort, page, limit. POST /projects to create. PUT /projects/:id to update.</p>
+              <div className="small" style={{ background: 'var(--color-surface-2)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', padding: 8, fontFamily: 'ui-monospace, monospace', fontSize: 11.5 }}>projectsService.list(params)</div>
+            </div>
+            <div className="surface" style={{ padding: 16 }}>
+              <div style={{ fontWeight: 600, fontSize: 13, display: 'flex', gap: 8, alignItems: 'center' }}><Icon name="tasks" size={14} /> Tasks API</div>
+              <p className="small muted" style={{ marginTop: 6, lineHeight: 1.6 }}>GET /tasks with filters. POST /tasks, PUT /tasks/:id, PATCH /tasks/:id/status for column moves.</p>
+              <div className="small" style={{ background: 'var(--color-surface-2)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', padding: 8, fontFamily: 'ui-monospace, monospace', fontSize: 11.5 }}>tasksService.move(id, status)</div>
+            </div>
+            <div className="surface" style={{ padding: 16 }}>
+              <div style={{ fontWeight: 600, fontSize: 13, display: 'flex', gap: 8, alignItems: 'center' }}><Icon name="dashboard" size={14} /> Auth and stats</div>
+              <p className="small muted" style={{ marginTop: 6, lineHeight: 1.6 }}>POST /auth/login and /auth/register. GET /auth/me and POST /auth/logout. GET /stats/overview for dashboard numbers.</p>
+              <div className="small" style={{ background: 'var(--color-surface-2)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', padding: 8, fontFamily: 'ui-monospace, monospace', fontSize: 11.5 }}>authService.login(payload)</div>
+            </div>
           </div>
-          <p className="small muted text-center" style={{ marginTop: 10 }}>Pricing is illustrative demo content. No payments are processed without a backend.</p>
+          <p className="small muted" style={{ marginTop: 10 }}>The frontend never talks to MongoDB directly. All data goes through your Express API. Keep VITE_API_BASE_URL in your .env file and do not commit real .env.</p>
         </div>
       </section>
 
       <section className="section-tight">
         <div className="container">
-          <div style={{ background: 'linear-gradient(135deg, #4F46E5, #7C3AED 60%, #06B6D4)', color: 'white', borderRadius: 20, padding: 24, display: 'flex', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap', alignItems: 'center' }}>
+          <div style={{ background: 'var(--color-primary)', color: 'white', borderRadius: 'var(--radius-lg)', padding: 18, display: 'flex', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap', alignItems: 'center', border: '1px solid var(--color-primary-700)' }}>
             <div>
-              <h3 style={{ margin: 0, fontSize: 20 }}>Ready to make work flow?</h3>
-              <p style={{ margin: '6px 0 0', opacity: .92, maxWidth: 560 }}>Create your free workspace, invite your team, and turn plans into shipped work. Demo login works instantly — or wire up your own API.</p>
+              <h3 style={{ margin: 0, fontSize: 16 }}>Start with sample data, then connect your API</h3>
+              <p style={{ margin: '6px 0 0', opacity: .9, maxWidth: 560, fontSize: 13, lineHeight: 1.6 }}>Create a free account to see the dashboard and board with sample projects and tasks, or connect your Express server to show live data.</p>
             </div>
-            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-              <Link to="/signup" className="btn" style={{ background: 'white', color: 'var(--color-primary)', borderColor: 'white' }}>Create free account</Link>
-              <Link to="/contact" className="btn" style={{ background: 'transparent', color: 'white', borderColor: 'rgba(255,255,255,.4)' }}>Talk to us</Link>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+              <Link to="/signup" className="btn" style={{ background: 'white', color: 'var(--color-primary)', borderColor: 'white' }}>Create account</Link>
+              <Link to="/contact" className="btn" style={{ background: 'transparent', color: 'white', borderColor: 'rgba(255,255,255,.45)' }}>Contact</Link>
             </div>
           </div>
         </div>

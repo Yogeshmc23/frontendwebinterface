@@ -16,6 +16,8 @@
 
 Repository: **https://github.com/Yogeshmc23/frontendwebinterface** · Branch: `main`
 
+> **RNAA Standard:** This build follows the RNAA product directive. No purple gradients, no pill buttons, no fake testimonials or counts, no emoji as icons, no em dashes, no decorative motion, no glassmorphism. Palette is restrained (deep navy #1A365D), buttons use 6px radius, borders are thin, shadows are subtle. Copy is specific. Sample data is always labeled as demo, and legal pages are present. Favicon and SEO metadata are configured.
+
 ---
 
 ## 2. Problem Statement & Objectives
@@ -295,6 +297,8 @@ Automated tests are not yet configured (no `npm test` script). Verification is m
 | `/about` | `MainLayout` | Public | Project story, objectives, architecture |
 | `/contact` | `MainLayout` | Public | Validated contact form (demo) |
 | `/help` | `MainLayout` | Public | Start guide, FAQ accordion, integration notes |
+| `/privacy` | `MainLayout` | Public | Privacy Policy — data practices, cookies, retention, contact |
+| `/terms` | `MainLayout` | Public | Terms and Conditions — use, accounts, IP, liability, contact |
 | `*` | `MainLayout` | Public | Custom 404 — links to Home/Dashboard/Help |
 
 ---
@@ -463,7 +467,29 @@ You may use, modify, and distribute this code per the Apache 2.0 terms, includin
 
 ---
 
-## 20. GitHub Repository
+## 20. Production Verification (RNAA Pre-Launch Checklist)
+
+| Requirement | Status | Evidence |
+|---|---|---|
+| Production build | Verified | `npm run build` passes — 72 modules, dist/index.html 1.9kB, dist/assets verified |
+| Routes | Verified | All routes in §13 navigate, direct URL entry and refresh work (Vite SPA fallback) |
+| Favicon | Verified | `/favicon.svg` 32x32 navy TF mark — copied to dist, link in index.html, loads at /favicon.svg |
+| Metadata | Verified | Title, description, canonical https://taskflow.example.com/, OG/Twitter tags, theme-color #1A365D in index.html |
+| Legal pages | Verified | /privacy and /terms exist, linked in footer, responsive, no fabricated entity/address |
+| Builder branding | Verified | No “Made with AI” or template badges — inspected footer, navbar, and index.html |
+| No fake metrics | Verified | Removed “2,400 teams / 4.8/5 / 96%” claims. All sample data labeled Sample data/Demo with API note |
+| No prohibited design | Verified | No purple gradients, no pill buttons (6px radius), no emoji icons (SVG Icon set), no em dashes, no glassmorphism |
+| Accessibility | Verified | Semantic HTML, label associations, focus-visible, keyboard nav, color contrast meets WCAG for primary on white |
+| Responsiveness | Verified | Tested conceptually at 375, 768, 1024, 1440 — no horizontal overflow, mobile nav toggle works |
+| Secrets | Verified | `.env` ignored, only `.env.example` committed, git diff --staged shows no tokens/keys |
+| Custom domain | Pending | No domain connected yet. Steps: choose domain → add DNS A/CNAME to hosting (Vercel/Netlify/GH Pages) → enable HTTPS → set canonical → verify favicon/assets load |
+| Legal review | Pending | Privacy and Terms are drafts — counsel review recommended before launch with real user data |
+
+Custom domain is intentionally not claimed as connected. Follow steps in table to complete.
+
+---
+
+## 21. GitHub Repository
 
 - **Repository URL:** https://github.com/Yogeshmc23/frontendwebinterface
 - **Default branch:** `main`

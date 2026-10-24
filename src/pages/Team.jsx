@@ -6,7 +6,7 @@ export default function Team() {
       <div className="page-header">
         <div>
           <h1 className="page-title">Team</h1>
-          <p className="page-subtitle">Workloads and ownership at a glance • <span className="badge badge-info">Demo data — GET /team</span></p>
+          <p className="page-subtitle">Workloads and ownership at a glance • <span className="badge badge-info">Demo data GET /team</span></p>
         </div>
         <button className="btn btn-secondary" onClick={() => alert('Demo: Invite flow would open (requires backend).')}>Invite member</button>
       </div>
@@ -24,8 +24,8 @@ export default function Team() {
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span className="badge badge-neutral">{m.tasks} tasks assigned</span>
-              <div style={{ height: 8, flex: 1, margin: '0 12px', borderRadius: 999, background: 'var(--color-surface-2)', border: '1px solid var(--color-border)', overflow: 'hidden' }}>
-                <div style={{ width: `${Math.min(100, m.tasks * 7)}%`, height: '100%', background: 'linear-gradient(90deg, var(--color-primary), #7C3AED)' }} />
+              <div style={{ height: 8, flex: 1, margin: '0 12px', borderRadius: 4, background: 'var(--color-surface-2)', border: '1px solid var(--color-border)', overflow: 'hidden' }}>
+                <div style={{ width: `${Math.min(100, m.tasks * 7)}%`, height: '100%', background: 'var(--color-primary)' }} />
               </div>
             </div>
             <div className="cluster">
@@ -44,7 +44,7 @@ export default function Team() {
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13 }}>
                 <span style={{ fontWeight: 600 }}>{m.name}</span><span className="muted">{m.tasks} tasks</span>
               </div>
-              <div style={{ height: 8, borderRadius: 999, background: 'var(--color-surface-2)', border: '1px solid var(--color-border)', overflow: 'hidden' }}>
+              <div style={{ height: 8, borderRadius: 4, background: 'var(--color-surface-2)', border: '1px solid var(--color-border)', overflow: 'hidden' }}>
                 <div style={{ width: `${(m.tasks / 15) * 100}%`, height: '100%', background: 'var(--color-primary)' }} />
               </div>
             </div>

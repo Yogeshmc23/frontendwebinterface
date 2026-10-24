@@ -17,7 +17,7 @@ export default function Pagination({ page, totalPages, onPageChange, totalItems,
         {totalItems ? `Showing ${(page-1)*perPage + 1}–${Math.min(page*perPage, totalItems)} of ${totalItems}` : ''}
       </div>
       <div className="pager">
-        <button className="page-btn" disabled={page <= 1} onClick={() => onPageChange(page - 1)}>← Prev</button>
+        <button className="page-btn" disabled={page <= 1} onClick={() => onPageChange(page - 1)}>Prev</button>
         {items.map((it, idx) =>
           it === '…' ? (
             <span key={`e-${idx}`} style={{ padding: '0 4px', color: 'var(--color-text-3)' }}>…</span>
@@ -27,7 +27,7 @@ export default function Pagination({ page, totalPages, onPageChange, totalItems,
             </button>
           )
         )}
-        <button className="page-btn" disabled={page >= totalPages} onClick={() => onPageChange(page + 1)}>Next →</button>
+        <button className="page-btn" disabled={page >= totalPages} onClick={() => onPageChange(page + 1)}>Next</button>
       </div>
     </div>
   )

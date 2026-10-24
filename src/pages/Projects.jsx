@@ -95,7 +95,7 @@ export default function Projects() {
       <div className="page-header">
         <div>
           <h1 className="page-title">Projects</h1>
-          <p className="page-subtitle">Organize work into projects. {filtered.length} of {projects.length} shown • <span className="badge badge-info">Demo data — wire to GET /projects</span></p>
+          <p className="page-subtitle">Organize work into projects. {filtered.length} of {projects.length} shown • <span className="badge badge-info">Demo data wire to GET /projects</span></p>
         </div>
         <button className="btn btn-primary" onClick={openCreate}>+ New project</button>
       </div>
@@ -125,7 +125,7 @@ export default function Projects() {
         </div>
       </div>
 
-      {toast && <div role="status" aria-live="polite" style={{ background: 'var(--color-success-soft)', border: '1px solid #A7F3D0', color: '#065F46', padding: '10px 12px', borderRadius: 12, fontSize: 13 }}>{toast}</div>}
+      {toast && <div role="status" aria-live="polite" style={{ background: 'var(--color-success-soft)', border: '1px solid #A7F3D0', color: '#065F46', padding: '10px 12px', borderRadius: 'var(--radius-md)', fontSize: 13 }}>{toast}</div>}
 
       {paged.length ? (
         <div className="grid grid-3">
@@ -134,7 +134,7 @@ export default function Projects() {
           ))}
         </div>
       ) : (
-        <EmptyState icon="▦" title="No projects match your filters" description="Try adjusting search, status or priority. You can also create a new project to get started." action={<button className="btn btn-primary" onClick={openCreate}>Create project</button>} />
+        <EmptyState icon="projects" title="No projects match your filters" description="Try adjusting search, status or priority. You can also create a new project to get started." action={<button className="btn btn-primary" onClick={openCreate}>Create project</button>} />
       )}
 
       <Pagination page={page} totalPages={totalPages} onPageChange={setPage} totalItems={filtered.length} perPage={perPage} />
@@ -175,7 +175,7 @@ export default function Projects() {
               <option>Planning</option><option>In Progress</option><option>Review</option><option>Completed</option>
             </select>
           </div>
-          <div style={{ background: 'var(--color-info-soft)', border: '1px solid #BAE6FD', borderRadius: 12, padding: 10, fontSize: 12, color: '#075985' }}>
+          <div style={{ background: 'var(--color-info-soft)', border: '1px solid #BAE6FD', borderRadius: 'var(--radius-md)', padding: 10, fontSize: 12, color: '#075985' }}>
             <strong>Backend mapping:</strong> This form would <code>POST /projects</code> or <code>PUT /projects/:id</code> via <code>projectsService</code>. Demo mode updates local state only.
           </div>
         </form>

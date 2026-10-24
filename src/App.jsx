@@ -19,6 +19,8 @@ import Settings from './pages/Settings.jsx'
 import About from './pages/About.jsx'
 import Contact from './pages/Contact.jsx'
 import Help from './pages/Help.jsx'
+import Privacy from './pages/Privacy.jsx'
+import Terms from './pages/Terms.jsx'
 import NotFound from './pages/NotFound.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 
@@ -34,7 +36,8 @@ export default function App() {
               <Route path="about" element={<About />} />
               <Route path="contact" element={<Contact />} />
               <Route path="help" element={<Help />} />
-              {/* Projects & Tasks accessible publicly (demo), but protected content also reachable */}
+              <Route path="privacy" element={<Privacy />} />
+              <Route path="terms" element={<Terms />} />
               <Route path="projects" element={<Projects />} />
               <Route path="projects/:id" element={<ProjectDetail />} />
               <Route path="tasks" element={<Tasks />} />
@@ -49,14 +52,7 @@ export default function App() {
 
             {/* Dashboard (protected) */}
             <Route element={<DashboardLayout />}>
-              <Route
-                path="dashboard"
-                element={
-                  <ProtectedRoute>
-                    <Dashboard />
-                  </ProtectedRoute>
-                }
-              />
+              <Route path="dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
               <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
               <Route path="settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
             </Route>
@@ -64,7 +60,7 @@ export default function App() {
             {/* Legacy redirect */}
             <Route path="home" element={<Navigate to="/" replace />} />
 
-            {/* 404 — standalone with main chrome */}
+            {/* 404 with main chrome */}
             <Route path="*" element={<MainLayout />}>
               <Route path="*" element={<NotFound />} />
             </Route>

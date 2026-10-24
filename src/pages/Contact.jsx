@@ -25,9 +25,9 @@ export default function Contact() {
       <div style={{ display: 'grid', gridTemplateColumns: '1.1fr .9fr', gap: 22, alignItems: 'start' }}>
         <div>
           <h1 style={{ margin: 0, fontSize: 30 }}>Contact us</h1>
-          <p className="muted" style={{ marginTop: 8 }}>Questions, feedback, or backend integration help — we’d love to hear from you. This form is frontend-only (demo) until wired to <code>POST /contact</code>.</p>
+          <p className="muted" style={{ marginTop: 8 }}>Questions, feedback, or backend integration help we’d love to hear from you. This form is frontend-only (demo) until wired to <code>POST /contact</code>.</p>
 
-          {sent && <div role="status" style={{ marginTop: 12, background: 'var(--color-success-soft)', border: '1px solid #A7F3D0', color: '#065F46', padding: '10px 12px', borderRadius: 12, fontSize: 13 }}>Message sent (demo) — in production this would POST to your Express API.</div>}
+          {sent && <div role="status" style={{ marginTop: 12, background: 'var(--color-success-soft)', border: '1px solid #A7F3D0', color: '#065F46', padding: '10px 12px', borderRadius: 'var(--radius-md)', fontSize: 13 }}>Message sent (demo) in production this would POST to your Express API.</div>}
 
           <form onSubmit={onSubmit} noValidate style={{ marginTop: 16, display: 'grid', gap: 14 }} className="surface" aria-label="Contact form">
             <div className="grid grid-2">
@@ -53,8 +53,8 @@ export default function Contact() {
               <textarea id="c-message" className={`textarea ${errors.message ? 'error' : ''}`} rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Tell us how we can help…" />
               {errors.message && <span className="error-text">{errors.message}</span>}
             </div>
-            <button className="btn btn-primary btn-lg" type="submit">Send message →</button>
-            <p className="small muted" style={{ margin: 0 }}>We respect your privacy. Demo does not store messages — backend should validate and persist safely.</p>
+            <button className="btn btn-primary btn-lg" type="submit">Send message</button>
+            <p className="small muted" style={{ margin: 0 }}>We respect your privacy. Demo does not store messages backend should validate and persist safely.</p>
           </form>
         </div>
 
@@ -62,11 +62,11 @@ export default function Contact() {
           <div className="surface" style={{ padding: 18, display: 'grid', gap: 10 }}>
             <h3 style={{ margin: 0, fontSize: 16 }}>Reach us</h3>
             <div style={{ display: 'grid', gap: 8, fontSize: 13, color: 'var(--color-text-2)' }}>
-              <div>✉ support@taskflow.demo</div>
-              <div>◷ Mon–Fri, 10am–6pm IST (Bengaluru)</div>
-              <div>⌖ TaskFlow HQ, Bengaluru, Karnataka, IN</div>
+              <div>Email: support@taskflow.demo</div>
+              <div>Hours: Mon–Fri, 10am–6pm IST (Bengaluru)</div>
+              <div>Location: TaskFlow HQ, Bengaluru, Karnataka, IN</div>
             </div>
-            <div style={{ background: 'var(--color-info-soft)', border: '1px solid #BAE6FD', borderRadius: 12, padding: 12, fontSize: 12, color: '#075985' }}>
+            <div style={{ background: 'var(--color-info-soft)', border: '1px solid #BAE6FD', borderRadius: 'var(--radius-md)', padding: 12, fontSize: 12, color: '#075985' }}>
               For recruiters & reviewers: all code, routes and docs are in this repository. Build is verified via GitHub Actions CI.
             </div>
           </div>

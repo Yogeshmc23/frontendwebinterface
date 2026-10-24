@@ -6,7 +6,7 @@ const faqs = [
   { q: 'Where can I see mock-data limitations?', a: 'Every page that uses demo data shows a badge. CRUD for projects/tasks is local-state only (in-memory). Pagination, search and filters run on the client. With a backend, replace mock imports with service calls and add loading/error states (already styled).' },
   { q: 'How does pagination work?', a: 'Tasks and Projects paginate client-side in demo. The <Pagination> component supports page, totalPages, totalltems, perPage and calls onPageChange. For API pagination, switch to cursor/offset params: e.g., GET /tasks?page=2&limit=9&search=foo.' },
   { q: 'Is the app responsive and accessible?', a: 'Yes. CSS Grid/Flex with breakpoints for 320–480 (mobile), 481–768 (tablet), 769–1024 (laptop), 1025+ (desktop). Semantic HTML, focus-visible, keyboard navigation, form labels, error announcements, and reduced-motion support are built-in.' },
-  { q: 'What backend is expected?', a: 'Node.js + Express with MongoDB (Mongoose). Suggested models: User, Project, Task. Provide REST routes for CRUD, auth, and stats. The frontend never talks to MongoDB directly — only via your Express API.' },
+  { q: 'What backend is expected?', a: 'Node.js + Express with MongoDB (Mongoose). Suggested models: User, Project, Task. Provide REST routes for CRUD, auth, and stats. The frontend never talks to MongoDB directly only via your Express API.' },
 ]
 
 export default function Help() {
@@ -20,8 +20,8 @@ export default function Help() {
         </div>
 
         <div className="surface" style={{ padding: 18, display: 'grid', gap: 12 }}>
-          <h3 style={{ margin: 0, fontSize: 16 }}>Quick start — Windows PowerShell</h3>
-          <pre style={{ margin: 0, background: 'var(--color-surface-2)', border: '1px solid var(--color-border)', borderRadius: 12, padding: 14, overflow: 'auto', fontSize: 12, lineHeight: 1.8 }}>
+          <h3 style={{ margin: 0, fontSize: 16 }}>Quick start Windows PowerShell</h3>
+          <pre style={{ margin: 0, background: 'var(--color-surface-2)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', padding: 14, overflow: 'auto', fontSize: 12, lineHeight: 1.8 }}>
 {`# 1) Install dependencies
 npm install
 
@@ -37,7 +37,7 @@ npm run dev
 npm run build
 npm run preview   # serves dist on http://localhost:4173`}
           </pre>
-          <div style={{ background: 'var(--color-warning-soft)', border: '1px solid #FDE68A', borderRadius: 12, padding: 10, fontSize: 12, color: '#92400E' }}>
+          <div style={{ background: 'var(--color-warning-soft)', border: '1px solid #FDE68A', borderRadius: 'var(--radius-md)', padding: 10, fontSize: 12, color: '#92400E' }}>
             If you see <code>VITE_API_BASE_URL</code> missing, the app falls back to <code>http://localhost:5000/api</code> and shows mock data. Check browser console for API errors.
           </div>
         </div>
@@ -56,7 +56,7 @@ npm run preview   # serves dist on http://localhost:4173`}
         <div className="surface" style={{ padding: 16, display: 'grid', gap: 10 }}>
           <h3 style={{ margin: 0, fontSize: 15 }}>Still need help?</h3>
           <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-2)' }}>Reach out via the Contact page or open an issue on GitHub. For CI, the workflow at <code>.github/workflows/ci.yml</code> runs lint + build on every push to <code>main</code>.</p>
-          <a href="/contact" className="btn btn-primary" style={{ width: 'fit-content' }}>Contact support →</a>
+          <a href="/contact" className="btn btn-primary" style={{ width: 'fit-content' }}>Contact support</a>
         </div>
       </div>
     </div>

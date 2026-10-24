@@ -24,8 +24,8 @@ export default function ProjectDetail() {
   return (
     <div style={{ display: 'grid', gap: 16 }}>
       <div style={{ display: 'flex', gap: 10 }}>
-        <Link to="/projects" className="btn btn-ghost btn-sm">← Projects</Link>
-        <Link to="/tasks" className="btn btn-ghost btn-sm">Board →</Link>
+        <Link to="/projects" className="btn btn-ghost btn-sm">Back to projects</Link>
+        <Link to="/tasks" className="btn btn-ghost btn-sm">Board</Link>
       </div>
 
       <div className="surface" style={{ padding: 18, display: 'grid', gap: 14 }}>
@@ -42,8 +42,8 @@ export default function ProjectDetail() {
           </div>
           <div style={{ display: 'grid', gap: 8, minWidth: 220 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, fontWeight: 700, color: 'var(--color-text-3)' }}><span>Progress</span><span>{progress}%</span></div>
-            <div style={{ height: 10, borderRadius: 999, background: 'var(--color-surface-2)', border: '1px solid var(--color-border)', overflow: 'hidden' }}>
-              <div style={{ width: `${progress}%`, height: '100%', background: 'linear-gradient(90deg, var(--color-primary), #7C3AED)' }} />
+            <div style={{ height: 10, borderRadius: 4, background: 'var(--color-surface-2)', border: '1px solid var(--color-border)', overflow: 'hidden' }}>
+              <div style={{ width: `${progress}%`, height: '100%', background: 'var(--color-primary)' }} />
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <div style={{ display: 'flex' }}>{project.members.map((m, i) => <img key={i} src={m} alt="member" width={28} height={28} style={{ borderRadius: '50%', border: '2px solid var(--color-surface)', marginLeft: i ? -8 : 0 }} />)}</div>
@@ -59,7 +59,7 @@ export default function ProjectDetail() {
           {tasks.length ? (
             <div style={{ display: 'grid', gap: 10 }}>
               {tasks.map((t) => (
-                <div key={t.id} style={{ border: '1px solid var(--color-border)', borderRadius: 12, padding: 12, display: 'grid', gap: 6, background: 'var(--color-surface-2)' }}>
+                <div key={t.id} style={{ border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', padding: 12, display: 'grid', gap: 6, background: 'var(--color-surface-2)' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8 }}>
                     <span style={{ fontWeight: 700, fontSize: 13 }}>{t.title}</span>
                     <span className={`badge badge-${priorityColor(t.priority)}`}>{t.priority}</span>
@@ -87,7 +87,7 @@ export default function ProjectDetail() {
               <div style={{ display: 'flex', justifyContent: 'space-between' }}><span className="muted">Status</span><strong>{project.status}</strong></div>
             </div>
           </div>
-          <div style={{ background: 'var(--color-primary-soft)', border: '1px solid #C7D2FE', borderRadius: 12, padding: 12, fontSize: 12, color: 'var(--color-primary-700)', lineHeight: 1.6 }}>
+          <div style={{ background: 'var(--color-primary-soft)', border: '1px solid #C7D2FE', borderRadius: 'var(--radius-md)', padding: 12, fontSize: 12, color: 'var(--color-primary-700)', lineHeight: 1.6 }}>
             Backend: <code>GET /projects/:id</code> should return project + populated tasks. Frontend fallback is mock data when the API is offline.
           </div>
         </div>

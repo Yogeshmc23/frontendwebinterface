@@ -1,55 +1,55 @@
 export default function About() {
   return (
     <div className="container section">
-      <div style={{ maxWidth: 760, margin: '0 auto', display: 'grid', gap: 18 }}>
+      <div style={{ maxWidth: 720, margin: '0 auto', display: 'grid', gap: 16 }}>
         <div>
-          <h1 style={{ margin: 0, fontSize: 32 }}>About TaskFlow</h1>
-          <p className="lead" style={{ marginTop: 8 }}>TaskFlow is a focused work-management frontend — designed for real teams and built to be extended with a Node.js + Express + MongoDB backend.</p>
+          <h1 style={{ margin: 0, fontSize: 26 }}>About TaskFlow</h1>
+          <p className="lead" style={{ marginTop: 8, fontSize: 14, lineHeight: 1.6 }}>TaskFlow is a work management frontend for small product teams. It provides projects, a Kanban board, and a dashboard in a single workspace. It is designed to be extended with a Node, Express, and MongoDB backend.</p>
         </div>
 
-        <div className="surface" style={{ padding: 18, display: 'grid', gap: 12 }}>
-          <h3 style={{ margin: 0 }}>Problem we solve</h3>
-          <p style={{ margin: 0, color: 'var(--color-text-2)', lineHeight: 1.7 }}>Teams lose momentum when tasks live in scattered sheets, chats, and inboxes. TaskFlow brings projects, assignments, progress, and accountability into one clean workspace — without the bloat of enterprise suites.</p>
+        <div className="surface" style={{ padding: 16, display: 'grid', gap: 10 }}>
+          <h3 style={{ margin: 0, fontSize: 14 }}>Problem we solve</h3>
+          <p style={{ margin: 0, color: 'var(--color-text-2)', lineHeight: 1.6, fontSize: 13.5 }}>Teams lose momentum when tasks live in scattered sheets, chat threads, and inboxes. TaskFlow brings projects, assignments, progress, and due dates into one clear workspace, without the extra tools that larger suites include.</p>
         </div>
 
         <div className="grid grid-2">
-          <div className="surface" style={{ padding: 18 }}>
-            <h4 style={{ margin: '0 0 6px' }}>Objectives</h4>
-            <ul style={{ margin: 0, paddingLeft: 18, color: 'var(--color-text-2)', fontSize: 14, lineHeight: 1.7 }}>
-              <li>Provide a production-quality React frontend that’s responsive, accessible, and maintainable.</li>
-              <li>Demonstrate a clean API layer that plugs into Express + MongoDB (via <code>VITE_API_BASE_URL</code>).</li>
-              <li>Keep demo data clearly separated so reviewers know what’s mock vs. backend-driven.</li>
+          <div className="surface" style={{ padding: 16 }}>
+            <h4 style={{ margin: '0 0 6px', fontSize: 13 }}>Objectives</h4>
+            <ul style={{ margin: 0, paddingLeft: 18, color: 'var(--color-text-2)', fontSize: 13, lineHeight: 1.6 }}>
+              <li>Provide a production quality React frontend that is responsive, accessible, and maintainable.</li>
+              <li>Show a clean API layer that connects to Express and MongoDB through VITE_API_BASE_URL.</li>
+              <li>Keep sample data clearly separated so reviewers can tell what is demo and what needs a backend.</li>
             </ul>
           </div>
-          <div className="surface" style={{ padding: 18 }}>
-            <h4 style={{ margin: '0 0 6px' }}>Tech choices</h4>
-            <ul style={{ margin: 0, paddingLeft: 18, color: 'var(--color-text-2)', fontSize: 14, lineHeight: 1.7 }}>
-              <li><strong>React + Vite</strong> for fast DX and optimized production builds.</li>
-              <li><strong>Plain CSS</strong> with variables — no Tailwind/Bootstrap to reduce lock-in.</li>
-              <li><strong>React Router</strong> + <strong>Context API</strong> for routing, auth, and theme.</li>
-              <li><strong>Axios</strong> centralized in <code>src/services/api.js</code> with auth interceptors.</li>
+          <div className="surface" style={{ padding: 16 }}>
+            <h4 style={{ margin: '0 0 6px', fontSize: 13 }}>Tech choices</h4>
+            <ul style={{ margin: 0, paddingLeft: 18, color: 'var(--color-text-2)', fontSize: 13, lineHeight: 1.6 }}>
+              <li><strong>React and Vite</strong> for fast development and an optimized production build.</li>
+              <li><strong>Plain CSS</strong> with variables. No Tailwind or Bootstrap to reduce lock in.</li>
+              <li><strong>React Router</strong> and <strong>Context API</strong> for routing, auth, and theme.</li>
+              <li><strong>Axios</strong> in <code style={{ background: 'var(--color-surface-2)', padding: '2px 6px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)' }}>src/services/api.js</code> with interceptors.</li>
             </ul>
           </div>
         </div>
 
-        <div className="surface" style={{ padding: 18 }}>
-          <h3 style={{ margin: 0 }}>Architecture</h3>
-          <pre style={{ background: 'var(--color-surface-2)', border: '1px solid var(--color-border)', borderRadius: 12, padding: 14, overflow: 'auto', fontSize: 12, lineHeight: 1.7 }}>
+        <div className="surface" style={{ padding: 16 }}>
+          <h3 style={{ margin: 0, fontSize: 14 }}>Architecture</h3>
+          <pre style={{ background: 'var(--color-surface-2)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', padding: 12, overflow: 'auto', fontSize: 11.5, lineHeight: 1.7, marginTop: 10 }}>
 {`src/
-  components/  → reusable UI (Navbar, Sidebar, Cards, Modal, etc.)
-  pages/       → route views (Home, Dashboard, Projects, Tasks, etc.)
-  layouts/     → MainLayout, DashboardLayout, AuthLayout
-  services/    → api.js (API_BASE_URL via VITE_API_BASE_URL)
-  context/     → AuthContext, ThemeContext
-  hooks/       → useDebounce, useLocalStorage
-  utils/       → mockData (demo), validators, format helpers
-  styles/     → global.css + components.css (CSS variables)`}
+  components/  reusable UI (Navbar, Sidebar, Cards, Modal, etc.)
+  pages/       route views (Home, Dashboard, Projects, Tasks, etc.)
+  layouts/     MainLayout, DashboardLayout, AuthLayout
+  services/    api.js (API_BASE_URL via VITE_API_BASE_URL)
+  context/     AuthContext, ThemeContext
+  hooks/       useDebounce, useLocalStorage
+  utils/       mockData (demo), validators, format helpers
+  styles/      global.css and components.css (CSS variables)`}
           </pre>
         </div>
 
-        <div className="surface" style={{ padding: 16, display: 'flex', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
-          <span className="small muted">Built in Bengaluru, IN • Apache-2.0 • MERN-ready • Production build verified</span>
-          <a href="https://github.com/Yogeshmc23/frontendwebinterface" target="_blank" rel="noreferrer" className="btn btn-primary btn-sm">View on GitHub →</a>
+        <div className="surface" style={{ padding: 14, display: 'flex', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
+          <span className="small muted" style={{ fontSize: 11.5 }}>Built in Bengaluru, IN Apache 2.0 MERN ready Build verified</span>
+          <a href="https://github.com/Yogeshmc23/frontendwebinterface" target="_blank" rel="noreferrer" className="btn btn-primary btn-sm">View on GitHub</a>
         </div>
       </div>
     </div>

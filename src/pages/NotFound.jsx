@@ -11,7 +11,7 @@ export default function NotFound() {
         <Link to="/dashboard" className="btn btn-secondary">Open Dashboard</Link>
         <Link to="/help" className="btn btn-ghost">Help Center</Link>
       </div>
-      <div className="small muted">If you followed an internal link, please report it via Contact — we’ll fix it.</div>
+      <div className="small muted">If you followed an internal link, please report it via Contact - we’ll fix it.</div>
     </div>
   )
 }
