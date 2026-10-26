@@ -48,3 +48,8 @@ uploads/
 
 # Vite cache
 .vite/
+
+# Tooling caches and test output
+.eslintcache
+test-results/
+playwright-report/

@@ -123,7 +123,7 @@ export default function Dashboard() {
                     <td><span className="badge badge-neutral" style={{ fontSize: 11 }}>{t.projectName}</span></td>
                     <td>
                       <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12.5 }}>
-                        <img src={t.assigneeAvatar} alt={t.assignee} width={18} height={18} style={{ borderRadius: '50%' }} />
+                        <img src={t.assigneeAvatar} alt="" width={18} height={18} style={{ borderRadius: '50%' }} />
                         {t.assignee}
                       </span>
                     </td>

@@ -18,7 +18,7 @@ export default function Privacy() {
 
           <h3 style={{ margin: '6px 0 0', fontSize: 15 }}>1. Information we collect</h3>
           <ul style={{ margin: 0, paddingLeft: 18, color: 'var(--color-text-2)', fontSize: 13.5, lineHeight: 1.7 }}>
-            <li><strong>Account information in demo:</strong> Name and email you enter on registration and login are stored in browser localStorage as sample data. Passwords entered in demo are not sent to a server and are not persisted securely. This is demo behavior only.</li>
+            <li><strong>Account information in demo:</strong> Name and email you enter on registration and login are stored in browser localStorage as sample data. Passwords entered in demo are not sent to a server and are not stored anywhere. This is demo behavior only.</li>
             <li><strong>Account information in production:</strong> When you connect a backend, registration sends name, email, and password to your Express API. Passwords should be hashed on the server and never stored in frontend code. The server should set an httpOnly cookie for session management.</li>
             <li><strong>Workspace content:</strong> Projects, tasks, priorities, due dates, assignees, comments, and activity you create. In demo this lives in memory and resets on refresh. With a backend it is stored in MongoDB via your API.</li>
             <li><strong>Contact messages:</strong> Name, email, and message you submit on the contact page. In demo the form shows a confirmation but does not send data. With a backend it would POST to /contact.</li>

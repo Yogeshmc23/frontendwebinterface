@@ -45,7 +45,7 @@ export default function Footer() {
         </div>
 
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} TaskFlow. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} TaskFlow Contributors. Licensed under Apache 2.0.</span>
           <span>Built in Bengaluru, IN. API base via VITE_API_BASE_URL. Sample data is labeled as demo where used.</span>
         </div>
       </div>

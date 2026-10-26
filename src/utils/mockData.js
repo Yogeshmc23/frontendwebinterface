@@ -1,12 +1,14 @@
-// Mock/demodata — clearly separated from real API.
-// All demo flags are visible in UI (badges) so users know backend persistence is not active.
+import { avatarFor } from './avatar.js'
+
+// Demo data only. Kept separate from real API responses.
+// Every demo surface is labeled in the UI so the mock/real boundary is explicit.
 
 export const mockUser = {
   id: 'u_demo',
   name: 'Alex Morgan',
   email: 'alex@taskflow.demo',
   role: 'Product Manager',
-  avatar: 'https://i.pravatar.cc/200?img=32',
+  avatar: avatarFor('Alex Morgan'),
 }
 
 export const mockStats = {
@@ -25,19 +27,19 @@ export const mockProjects = [
     status: 'In Progress',
     progress: 68,
     dueDate: '2026-11-20',
-    members: ['https://i.pravatar.cc/100?img=12', 'https://i.pravatar.cc/100?img=22', 'https://i.pravatar.cc/100?img=18'],
+    members: [avatarFor('Priya Nair'), avatarFor('Marcus Lee'), avatarFor('Sana Ali')],
     tasksCount: 24,
     owner: 'You',
     priority: 'High',
   },
   {
     id: 'p2',
-    name: 'Mobile App — Phase 2',
+    name: 'Mobile App Phase 2',
     description: 'Push notifications, offline sync and biometric login.',
     status: 'Planning',
     progress: 22,
     dueDate: '2026-12-05',
-    members: ['https://i.pravatar.cc/100?img=14', 'https://i.pravatar.cc/100?img=15'],
+    members: [avatarFor('Emma Stone'), avatarFor('Rohan Patel')],
     tasksCount: 18,
     owner: 'Priya',
     priority: 'Medium',
@@ -49,7 +51,7 @@ export const mockProjects = [
     status: 'In Progress',
     progress: 54,
     dueDate: '2026-11-30',
-    members: ['https://i.pravatar.cc/100?img=26', 'https://i.pravatar.cc/100?img=32', 'https://i.pravatar.cc/100?img=11'],
+    members: [avatarFor('Sana Ali'), avatarFor('Alex Morgan'), avatarFor('Nina Gupta')],
     tasksCount: 31,
     owner: 'Marcus',
     priority: 'High',
@@ -61,7 +63,7 @@ export const mockProjects = [
     status: 'Review',
     progress: 82,
     dueDate: '2026-11-15',
-    members: ['https://i.pravatar.cc/100?img=33', 'https://i.pravatar.cc/100?img=29'],
+    members: [avatarFor('Marcus Lee'), avatarFor('Jonas Wu')],
     tasksCount: 14,
     owner: 'You',
     priority: 'High',
@@ -73,7 +75,7 @@ export const mockProjects = [
     status: 'Completed',
     progress: 100,
     dueDate: '2026-10-25',
-    members: ['https://i.pravatar.cc/100?img=7', 'https://i.pravatar.cc/100?img=19'],
+    members: [avatarFor('Aisha Khan'), avatarFor('Emma Stone')],
     tasksCount: 19,
     owner: 'Sana',
     priority: 'Medium',
@@ -85,26 +87,40 @@ export const mockProjects = [
     status: 'In Progress',
     progress: 41,
     dueDate: '2026-12-12',
-    members: ['https://i.pravatar.cc/100?img=5', 'https://i.pravatar.cc/100?img=9', 'https://i.pravatar.cc/100?img=13'],
+    members: [avatarFor('Priya Nair'), avatarFor('Rohan Patel'), avatarFor('Jonas Wu')],
     tasksCount: 27,
     owner: 'You',
     priority: 'Low',
   },
 ]
 
+const task = (id, title, projectId, projectName, assignee, priority, status, dueDate, description, tags) => ({
+  id,
+  title,
+  projectId,
+  projectName,
+  assignee,
+  assigneeAvatar: avatarFor(assignee),
+  priority,
+  status,
+  dueDate,
+  description,
+  tags,
+})
+
 export const mockTasks = [
-  { id: 't1', title: 'Create wireframes for new dashboard', projectId: 'p1', projectName: 'Website Redesign', assignee: 'Alex Morgan', assigneeAvatar: 'https://i.pravatar.cc/100?img=32', priority: 'High', status: 'Todo', dueDate: '2026-11-08', description: 'Low-fi wireframes covering analytics, tasks and settings. Ensure mobile responsiveness.', tags: ['Design', 'UX'] },
-  { id: 't2', title: 'Implement authentication flow', projectId: 'p4', projectName: 'API Migration', assignee: 'Rohan Patel', assigneeAvatar: 'https://i.pravatar.cc/100?img=15', priority: 'High', status: 'In Progress', dueDate: '2026-11-10', description: 'JWT + httpOnly cookie, refresh tokens, protected routes. Backend: /auth/*', tags: ['Backend', 'Security'] },
-  { id: 't3', title: 'Write API documentation', projectId: 'p4', projectName: 'API Migration', assignee: 'Sana Ali', assigneeAvatar: 'https://i.pravatar.cc/100?img=26', priority: 'Medium', status: 'In Progress', dueDate: '2026-11-12', description: 'Endpoints spec, error codes, Postman collection.', tags: ['Docs'] },
-  { id: 't4', title: 'Design email templates', projectId: 'p3', projectName: 'Q4 Campaign', assignee: 'Priya Nair', assigneeAvatar: 'https://i.pravatar.cc/100?img=14', priority: 'Medium', status: 'Review', dueDate: '2026-11-07', description: 'Responsive MJML templates, dark-mode tested.', tags: ['Design', 'Marketing'] },
-  { id: 't5', title: 'Fix file upload bug in tasks', projectId: 'p1', projectName: 'Website Redesign', assignee: 'Marcus Lee', assigneeAvatar: 'https://i.pravatar.cc/100?img=33', priority: 'High', status: 'Todo', dueDate: '2026-11-09', description: 'Upload fails for >10MB; add chunking + validation.', tags: ['Bug', 'Frontend'] },
-  { id: 't6', title: 'User testing for onboarding', projectId: 'p2', projectName: 'Mobile App — Phase 2', assignee: 'Emma Stone', assigneeAvatar: 'https://i.pravatar.cc/100?img=19', priority: 'Low', status: 'Done', dueDate: '2026-11-02', description: '5 user sessions recorded, synthesize findings.', tags: ['Research'] },
-  { id: 't7', title: 'Set up CI/CD pipeline', projectId: 'p4', projectName: 'API Migration', assignee: 'Alex Morgan', assigneeAvatar: 'https://i.pravatar.cc/100?img=32', priority: 'High', status: 'Done', dueDate: '2026-11-01', description: 'GitHub Actions: lint, test, build. Deploy to staging.', tags: ['DevOps'] },
-  { id: 't8', title: 'Create social media content calendar', projectId: 'p3', projectName: 'Q4 Campaign', assignee: 'Nina Gupta', assigneeAvatar: 'https://i.pravatar.cc/100?img=11', priority: 'Medium', status: 'Todo', dueDate: '2026-11-14', description: '30-day calendar for X/LinkedIn/IG with assets.', tags: ['Marketing'] },
-  { id: 't9', title: 'Audit accessibility (WCAG 2.1 AA)', projectId: 'p6', projectName: 'Design System v2', assignee: 'Jonas Wu', assigneeAvatar: 'https://i.pravatar.cc/100?img=8', priority: 'Medium', status: 'In Progress', dueDate: '2026-11-18', description: 'Axe + manual audit, color contrast, keyboard nav.', tags: ['A11y'] },
-  { id: 't10', title: 'Add realtime notifications', projectId: 'p1', projectName: 'Website Redesign', assignee: 'Aisha Khan', assigneeAvatar: 'https://i.pravatar.cc/100?img=5', priority: 'Low', status: 'Review', dueDate: '2026-11-16', description: 'Socket.io notifications for assignments/comments.', tags: ['Realtime'] },
-  { id: 't11', title: 'Optimize dashboard query performance', projectId: 'p4', projectName: 'API Migration', assignee: 'Rohan Patel', assigneeAvatar: 'https://i.pravatar.cc/100?img=15', priority: 'High', status: 'In Progress', dueDate: '2026-11-13', description: 'Add indexes on tasks.projectId, pagination via cursor.', tags: ['Backend', 'Performance'] },
-  { id: 't12', title: 'Finalize pricing page copy', projectId: 'p3', projectName: 'Q4 Campaign', assignee: 'Priya Nair', assigneeAvatar: 'https://i.pravatar.cc/100?img=14', priority: 'Low', status: 'Done', dueDate: '2026-10-30', description: 'Tone: friendly, transparent. CTA tests included.', tags: ['Content'] },
+  task('t1', 'Create wireframes for new dashboard', 'p1', 'Website Redesign', 'Alex Morgan', 'High', 'Todo', '2026-11-08', 'Low-fi wireframes covering analytics, tasks and settings. Ensure mobile responsiveness.', ['Design', 'UX']),
+  task('t2', 'Implement authentication flow', 'p4', 'API Migration', 'Rohan Patel', 'High', 'In Progress', '2026-11-10', 'JWT and httpOnly cookie, refresh tokens, protected routes. Backend: /auth/*', ['Backend', 'Security']),
+  task('t3', 'Write API documentation', 'p4', 'API Migration', 'Sana Ali', 'Medium', 'In Progress', '2026-11-12', 'Endpoints spec, error codes, Postman collection.', ['Docs']),
+  task('t4', 'Design email templates', 'p3', 'Q4 Campaign', 'Priya Nair', 'Medium', 'Review', '2026-11-07', 'Responsive MJML templates, dark-mode tested.', ['Design', 'Marketing']),
+  task('t5', 'Fix file upload bug in tasks', 'p1', 'Website Redesign', 'Marcus Lee', 'High', 'Todo', '2026-11-09', 'Upload fails for files over 10 MB; add chunking and validation.', ['Bug', 'Frontend']),
+  task('t6', 'User testing for onboarding', 'p2', 'Mobile App Phase 2', 'Emma Stone', 'Low', 'Done', '2026-11-02', '5 user sessions recorded, synthesize findings.', ['Research']),
+  task('t7', 'Set up CI/CD pipeline', 'p4', 'API Migration', 'Alex Morgan', 'High', 'Done', '2026-11-01', 'GitHub Actions: lint, test, build. Deploy to staging.', ['DevOps']),
+  task('t8', 'Create social media content calendar', 'p3', 'Q4 Campaign', 'Nina Gupta', 'Medium', 'Todo', '2026-11-14', '30-day calendar for X, LinkedIn, and Instagram with assets.', ['Marketing']),
+  task('t9', 'Audit accessibility (WCAG 2.1 AA)', 'p6', 'Design System v2', 'Jonas Wu', 'Medium', 'In Progress', '2026-11-18', 'Axe and manual audit, color contrast, keyboard navigation.', ['A11y']),
+  task('t10', 'Add realtime notifications', 'p1', 'Website Redesign', 'Aisha Khan', 'Low', 'Review', '2026-11-16', 'Socket.io notifications for assignments and comments.', ['Realtime']),
+  task('t11', 'Optimize dashboard query performance', 'p4', 'API Migration', 'Rohan Patel', 'High', 'In Progress', '2026-11-13', 'Add indexes on tasks.projectId, pagination via cursor.', ['Backend', 'Performance']),
+  task('t12', 'Finalize pricing page copy', 'p3', 'Q4 Campaign', 'Priya Nair', 'Low', 'Done', '2026-10-30', 'Tone: friendly, transparent. CTA tests included.', ['Content']),
 ]
 
 export const mockActivities = [
@@ -116,11 +132,11 @@ export const mockActivities = [
 ]
 
 export const mockTeam = [
-  { id: 'm1', name: 'Priya Nair', role: 'Product Designer', email: 'priya@taskflow.demo', avatar: 'https://i.pravatar.cc/150?img=14', tasks: 12 },
-  { id: 'm2', name: 'Marcus Lee', role: 'Frontend Engineer', email: 'marcus@taskflow.demo', avatar: 'https://i.pravatar.cc/150?img=33', tasks: 9 },
-  { id: 'm3', name: 'Sana Ali', role: 'Technical Writer', email: 'sana@taskflow.demo', avatar: 'https://i.pravatar.cc/150?img=26', tasks: 7 },
-  { id: 'm4', name: 'Rohan Patel', role: 'Backend Engineer', email: 'rohan@taskflow.demo', avatar: 'https://i.pravatar.cc/150?img=15', tasks: 15 },
-  { id: 'm5', name: 'Emma Stone', role: 'UX Researcher', email: 'emma@taskflow.demo', avatar: 'https://i.pravatar.cc/150?img=19', tasks: 6 },
+  { id: 'm1', name: 'Priya Nair', role: 'Product Designer', email: 'priya@taskflow.demo', avatar: avatarFor('Priya Nair'), tasks: 12 },
+  { id: 'm2', name: 'Marcus Lee', role: 'Frontend Engineer', email: 'marcus@taskflow.demo', avatar: avatarFor('Marcus Lee'), tasks: 9 },
+  { id: 'm3', name: 'Sana Ali', role: 'Technical Writer', email: 'sana@taskflow.demo', avatar: avatarFor('Sana Ali'), tasks: 7 },
+  { id: 'm4', name: 'Rohan Patel', role: 'Backend Engineer', email: 'rohan@taskflow.demo', avatar: avatarFor('Rohan Patel'), tasks: 15 },
+  { id: 'm5', name: 'Emma Stone', role: 'UX Researcher', email: 'emma@taskflow.demo', avatar: avatarFor('Emma Stone'), tasks: 6 },
 ]
 
 export function paginate(list, page, perPage) {

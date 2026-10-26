@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Icon } from './Icon.jsx'
 
 export default function Sidebar() {
+  const [notice, setNotice] = useState('')
   const items = [
     { to: '/dashboard', label: 'Overview', icon: 'dashboard' },
     { to: '/projects', label: 'Projects', icon: 'projects' },
@@ -10,6 +12,7 @@ export default function Sidebar() {
     { to: '/profile', label: 'Profile', icon: 'profile' },
     { to: '/settings', label: 'Settings', icon: 'settings' },
   ]
+
   return (
     <aside className="sidebar" aria-label="Dashboard sidebar">
       <div>
@@ -29,8 +32,9 @@ export default function Sidebar() {
           <span>Upgrade plan</span>
           <span className="badge badge-warning">Pro</span>
         </div>
-        <p style={{ margin: 0, color: 'var(--color-text-3)', fontSize: 12, lineHeight: 1.6 }}>Upgrade is a demo placeholder. A real billing page would connect to your backend checkout and show current subscription status.</p>
-        <button className="btn btn-primary btn-sm btn-block" type="button" onClick={() => alert('Demo: This would open the billing page. No payment is processed in demo mode.')}>View plans</button>
+        <p style={{ margin: 0, color: 'var(--color-text-3)', fontSize: 12, lineHeight: 1.6 }}>Billing is a demo placeholder. A real checkout would connect to your backend and show current subscription status.</p>
+        <button type="button" className="btn btn-primary btn-sm btn-block" onClick={() => setNotice('Billing is not connected in demo mode. No payment is processed.')}>View plans</button>
+        {notice && <p role="status" className="small muted" style={{ margin: 0, fontSize: 11.5 }}>{notice}</p>}
       </div>
 
       <div style={{ padding: 8, color: 'var(--color-text-3)', fontSize: 11.5, lineHeight: 1.5 }}>

@@ -48,7 +48,7 @@ export default function About() {
         </div>
 
         <div className="surface" style={{ padding: 14, display: 'flex', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
-          <span className="small muted" style={{ fontSize: 11.5 }}>Built in Bengaluru, IN Apache 2.0 MERN ready Build verified</span>
+          <span className="small muted" style={{ fontSize: 11.5 }}>Built in Bengaluru, IN · Apache 2.0 · MERN-ready frontend · Build verified in CI</span>
           <a href="https://github.com/Yogeshmc23/frontendwebinterface" target="_blank" rel="noreferrer" className="btn btn-primary btn-sm">View on GitHub</a>
         </div>
       </div>

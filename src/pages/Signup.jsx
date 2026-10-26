@@ -72,7 +72,7 @@ export default function Signup() {
 
         <label style={{ display: 'flex', gap: 10, alignItems: 'flex-start', fontSize: 13, color: 'var(--color-text-2)', cursor: 'pointer' }}>
           <input type="checkbox" checked={form.agree} onChange={(e) => setForm({ ...form, agree: e.target.checked })} style={{ marginTop: 3 }} />
-          <span>I agree to the <Link to="/help" style={{ color: 'var(--color-primary)', fontWeight: 700 }}>Terms</Link> and <Link to="/help" style={{ color: 'var(--color-primary)', fontWeight: 700 }}>Privacy Policy</Link>.</span>
+          <span>I agree to the <Link to="/terms" style={{ color: 'var(--color-primary)', fontWeight: 700 }}>Terms</Link> and <Link to="/privacy" style={{ color: 'var(--color-primary)', fontWeight: 700 }}>Privacy Policy</Link>.</span>
         </label>
         {errors.agree && <span className="error-text" style={{ marginTop: -8 }}>{errors.agree}</span>}
 

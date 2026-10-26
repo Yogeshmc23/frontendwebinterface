@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '', topic: 'General' })
@@ -25,7 +26,7 @@ export default function Contact() {
       <div style={{ display: 'grid', gridTemplateColumns: '1.1fr .9fr', gap: 22, alignItems: 'start' }}>
         <div>
           <h1 style={{ margin: 0, fontSize: 30 }}>Contact us</h1>
-          <p className="muted" style={{ marginTop: 8 }}>Questions, feedback, or backend integration help we’d love to hear from you. This form is frontend-only (demo) until wired to <code>POST /contact</code>.</p>
+          <p className="muted" style={{ marginTop: 8 }}>Questions, feedback, or backend integration help: we would like to hear from you. This form is frontend-only (demo) until wired to <code>POST /contact</code>.</p>
 
           {sent && <div role="status" style={{ marginTop: 12, background: 'var(--color-success-soft)', border: '1px solid #A7F3D0', color: '#065F46', padding: '10px 12px', borderRadius: 'var(--radius-md)', fontSize: 13 }}>Message sent (demo) in production this would POST to your Express API.</div>}
 
@@ -54,7 +55,7 @@ export default function Contact() {
               {errors.message && <span className="error-text">{errors.message}</span>}
             </div>
             <button className="btn btn-primary btn-lg" type="submit">Send message</button>
-            <p className="small muted" style={{ margin: 0 }}>We respect your privacy. Demo does not store messages backend should validate and persist safely.</p>
+            <p className="small muted" style={{ margin: 0 }}>We respect your privacy. The demo does not store messages; a backend should validate and persist them safely.</p>
           </form>
         </div>
 
@@ -62,12 +63,12 @@ export default function Contact() {
           <div className="surface" style={{ padding: 18, display: 'grid', gap: 10 }}>
             <h3 style={{ margin: 0, fontSize: 16 }}>Reach us</h3>
             <div style={{ display: 'grid', gap: 8, fontSize: 13, color: 'var(--color-text-2)' }}>
-              <div>Email: support@taskflow.demo</div>
-              <div>Hours: Mon–Fri, 10am–6pm IST (Bengaluru)</div>
-              <div>Location: TaskFlow HQ, Bengaluru, Karnataka, IN</div>
+              <div>Email: support@taskflow.demo (demo address)</div>
+              <div>Support hours: not configured for this demo</div>
+              <div>Location: not disclosed; replace this line with a real operating address before launch</div>
             </div>
             <div style={{ background: 'var(--color-info-soft)', border: '1px solid #BAE6FD', borderRadius: 'var(--radius-md)', padding: 12, fontSize: 12, color: '#075985' }}>
-              For recruiters & reviewers: all code, routes and docs are in this repository. Build is verified via GitHub Actions CI.
+              For reviewers: all code, routes, and docs are in this repository. Lint, tests, and the production build run in GitHub Actions.
             </div>
           </div>
           <div className="surface" style={{ padding: 18 }}>
@@ -78,7 +79,7 @@ export default function Contact() {
               <li>Is authentication real?</li>
               <li>How is pagination implemented?</li>
             </ul>
-            <a href="/help" className="btn btn-secondary btn-sm" style={{ marginTop: 10 }}>Open Help Center</a>
+            <Link to="/help" className="btn btn-secondary btn-sm" style={{ marginTop: 10 }}>Open Help Center</Link>
           </div>
         </div>
       </div>
