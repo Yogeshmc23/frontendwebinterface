@@ -1,5 +1,5 @@
 export function formatDate(dateStr) {
-  if (!dateStr) return '—'
+  if (!dateStr) return 'Not set'
   const d = new Date(dateStr)
   if (Number.isNaN(d.getTime())) return dateStr
   return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })

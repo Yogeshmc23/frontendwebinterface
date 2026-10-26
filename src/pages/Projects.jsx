@@ -7,6 +7,7 @@ import EmptyState from '../components/EmptyState.jsx'
 import { mockProjects as initial } from '../utils/mockData.js'
 import { useDebounce } from '../hooks/useDebounce.js'
 import { validateProject } from '../utils/validators.js'
+import { avatarFor } from '../utils/avatar.js'
 
 const perPage = 6
 
@@ -77,7 +78,7 @@ export default function Projects() {
     } else {
       const newProject = {
         id: `p_${Date.now()}`,
-        members: ['https://i.pravatar.cc/100?img=8'],
+        members: [avatarFor('Alex Morgan')],
         tasksCount: 0,
         progress: 0,
         owner: 'You',

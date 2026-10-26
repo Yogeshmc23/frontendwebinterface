@@ -1,7 +1,9 @@
+import { Icon } from './Icon.jsx'
+
 export default function SearchBar({ value, onChange, placeholder = 'Search…' }) {
   return (
     <div className="search-input">
-      <span className="search-icon" aria-hidden>⌕</span>
+      <span className="search-icon" aria-hidden><Icon name="search" size={15} /></span>
       <input
         className="input"
         type="search"

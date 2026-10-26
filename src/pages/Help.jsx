@@ -1,11 +1,12 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const faqs = [
-  { q: 'Is the login / auth real?', a: 'Demo mode simulates login locally (see src/context/AuthContext.jsx). In production, call authService.login() which POSTs to /auth/login. The Express backend should set an httpOnly cookie and the frontend should use apiClient with withCredentials:true. No tokens are stored insecurely in production.' },
+  { q: 'Is the login / auth real?', a: 'Demo mode simulates login locally (see src/context/AuthContext.jsx). In production, call authService.login() which POSTs to /auth/login. The Express backend should set an httpOnly cookie and the frontend should use apiClient with withCredentials:true. Prefer httpOnly cookies over localStorage tokens in production.' },
   { q: 'How do I connect my backend?', a: 'Create a .env file from .env.example and set VITE_API_BASE_URL to your API (e.g., http://localhost:5000/api). All service functions in src/services/api.js use this base URL. Endpoints expected: /auth/*, /projects, /tasks, /team, /stats/overview. See README for the contract.' },
   { q: 'Where can I see mock-data limitations?', a: 'Every page that uses demo data shows a badge. CRUD for projects/tasks is local-state only (in-memory). Pagination, search and filters run on the client. With a backend, replace mock imports with service calls and add loading/error states (already styled).' },
-  { q: 'How does pagination work?', a: 'Tasks and Projects paginate client-side in demo. The <Pagination> component supports page, totalPages, totalltems, perPage and calls onPageChange. For API pagination, switch to cursor/offset params: e.g., GET /tasks?page=2&limit=9&search=foo.' },
-  { q: 'Is the app responsive and accessible?', a: 'Yes. CSS Grid/Flex with breakpoints for 320–480 (mobile), 481–768 (tablet), 769–1024 (laptop), 1025+ (desktop). Semantic HTML, focus-visible, keyboard navigation, form labels, error announcements, and reduced-motion support are built-in.' },
+  { q: 'How does pagination work?', a: 'Tasks and Projects paginate client-side in demo. The <Pagination> component supports page, totalPages, totalItems, perPage and calls onPageChange. For API pagination, switch to cursor/offset params: e.g., GET /tasks?page=2&limit=9&search=foo.' },
+  { q: 'Is the app responsive and accessible?', a: 'Yes. CSS Grid/Flex with breakpoints for 320–480 (mobile), 481–768 (tablet), 769–1024 (laptop), 1025+ (desktop). Semantic HTML, focus-visible outlines, keyboard navigation, form labels, inline error text linked with aria-describedby, and reduced-motion support are built in.' },
   { q: 'What backend is expected?', a: 'Node.js + Express with MongoDB (Mongoose). Suggested models: User, Project, Task. Provide REST routes for CRUD, auth, and stats. The frontend never talks to MongoDB directly only via your Express API.' },
 ]
 
@@ -38,7 +39,7 @@ npm run build
 npm run preview   # serves dist on http://localhost:4173`}
           </pre>
           <div style={{ background: 'var(--color-warning-soft)', border: '1px solid #FDE68A', borderRadius: 'var(--radius-md)', padding: 10, fontSize: 12, color: '#92400E' }}>
-            If you see <code>VITE_API_BASE_URL</code> missing, the app falls back to <code>http://localhost:5000/api</code> and shows mock data. Check browser console for API errors.
+            If you see <code>VITE_API_BASE_URL</code> missing, the app falls back to <code>http://localhost:5000/api</code> and shows mock data. The app falls back to sample data; no API requests are made until you replace the mock imports with service calls.
           </div>
         </div>
 
@@ -55,8 +56,8 @@ npm run preview   # serves dist on http://localhost:4173`}
 
         <div className="surface" style={{ padding: 16, display: 'grid', gap: 10 }}>
           <h3 style={{ margin: 0, fontSize: 15 }}>Still need help?</h3>
-          <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-2)' }}>Reach out via the Contact page or open an issue on GitHub. For CI, the workflow at <code>.github/workflows/ci.yml</code> runs lint + build on every push to <code>main</code>.</p>
-          <a href="/contact" className="btn btn-primary" style={{ width: 'fit-content' }}>Contact support</a>
+          <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-2)' }}>Reach out via the Contact page or open an issue on GitHub. For CI, the workflow at <code>.github/workflows/ci.yml</code> runs lint, unit tests, and the production build on pushes and pull requests to <code>main</code>.</p>
+          <Link to="/contact" className="btn btn-primary" style={{ width: 'fit-content' }}>Contact support</Link>
         </div>
       </div>
     </div>

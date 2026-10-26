@@ -1,21 +1,31 @@
+import { useState } from 'react'
 import { mockTeam } from '../utils/mockData.js'
 
 export default function Team() {
+  const [notice, setNotice] = useState('')
+
   return (
     <div style={{ display: 'grid', gap: 16 }}>
       <div className="page-header">
         <div>
           <h1 className="page-title">Team</h1>
-          <p className="page-subtitle">Workloads and ownership at a glance • <span className="badge badge-info">Demo data GET /team</span></p>
+          <p className="page-subtitle">Workloads and ownership at a glance. <span className="badge badge-info">Demo data, GET /team</span></p>
         </div>
-        <button className="btn btn-secondary" onClick={() => alert('Demo: Invite flow would open (requires backend).')}>Invite member</button>
+        <button type="button" className="btn btn-secondary" onClick={() => setNotice('Invitations require the backend (POST /team/invite). No email is sent in demo mode.')}>Invite member</button>
       </div>
+
+      {notice && (
+        <div className="notice" role="status">
+          <span>{notice}</span>
+          <button type="button" className="btn btn-ghost btn-sm" onClick={() => setNotice('')}>Dismiss</button>
+        </div>
+      )}
 
       <div className="grid grid-3">
         {mockTeam.map((m) => (
           <div key={m.id} className="surface" style={{ padding: 18, display: 'grid', gap: 12 }}>
             <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-              <img src={m.avatar} alt={m.name} width={48} height={48} style={{ borderRadius: '50%', border: '2px solid var(--color-border)' }} />
+              <img src={m.avatar} alt="" width={48} height={48} style={{ borderRadius: '50%', border: '2px solid var(--color-border)' }} />
               <div>
                 <div style={{ fontWeight: 800 }}>{m.name}</div>
                 <div className="small muted">{m.role}</div>
@@ -29,8 +39,8 @@ export default function Team() {
               </div>
             </div>
             <div className="cluster">
-              <button className="btn btn-secondary btn-sm" onClick={() => alert(`Demo: Message to ${m.name}`)}>Message</button>
-              <button className="btn btn-ghost btn-sm" onClick={() => alert(`Demo: View tasks for ${m.name}`)}>View tasks</button>
+              <button type="button" className="btn btn-secondary btn-sm" onClick={() => setNotice(`Direct messages require the backend. Nothing was sent to ${m.name}.`)}>Message</button>
+              <button type="button" className="btn btn-ghost btn-sm" onClick={() => setNotice(`Task filtering by assignee is demo-only. Sample workload for ${m.name}: ${m.tasks} tasks.`)}>View tasks</button>
             </div>
           </div>
         ))}

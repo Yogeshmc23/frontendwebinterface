@@ -46,7 +46,7 @@ export default function ProjectDetail() {
               <div style={{ width: `${progress}%`, height: '100%', background: 'var(--color-primary)' }} />
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <div style={{ display: 'flex' }}>{project.members.map((m, i) => <img key={i} src={m} alt="member" width={28} height={28} style={{ borderRadius: '50%', border: '2px solid var(--color-surface)', marginLeft: i ? -8 : 0 }} />)}</div>
+              <div style={{ display: 'flex' }}>{project.members.map((m, i) => <img key={i} src={m} alt="" width={28} height={28} style={{ borderRadius: '50%', border: '2px solid var(--color-surface)', marginLeft: i ? -8 : 0 }} />)}</div>
               <span className="small muted">Team</span>
             </div>
           </div>

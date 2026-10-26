@@ -1,521 +1,339 @@
-# TaskFlow — Collaborative Task & Project Management Frontend
+# TaskFlow
 
-> **A modern, responsive, production-ready React frontend for a MERN stack work-management app.** Plan projects, track Kanban tasks, visualize progress, and manage teams — with a clean API layer ready for Node.js + Express + MongoDB.
+TaskFlow is a task and project management frontend built with React, Vite, and React Router. It provides a landing page, a Kanban task board, project views, a dashboard, team and profile screens, legal pages, and both light and dark themes.
 
-![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)
-![React](https://img.shields.io/badge/React-18-61DAFB?logo=react)
-![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite)
-![Router](https://img.shields.io/badge/React_Router-6-CA4245)
-![CI](https://github.com/Yogeshmc23/frontendwebinterface/actions/workflows/ci.yml/badge.svg)
+The interface runs today on clearly labeled sample data. A centralized API client is ready for a Node.js, Express, and MongoDB backend, but no backend is included in this repository.
 
----
+[![CI](https://github.com/Yogeshmc23/frontendwebinterface/actions/workflows/ci.yml/badge.svg)](https://github.com/Yogeshmc23/frontendwebinterface/actions/workflows/ci.yml)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 
-## 1. Overview
+- Repository: https://github.com/Yogeshmc23/frontendwebinterface
+- Default branch: `main`
+- Package: `taskflow-frontend` version `1.1.0`
 
-**TaskFlow** is a premium SaaS-style frontend that helps product teams organize work into projects, move tasks across a Kanban board, monitor overdue items, and keep ownership clear. It was built as a **MERN-ready frontend**: the UI is fully functional with curated mock data, and every network call is funneled through a single service layer (`src/services/api.js`) so swapping mocks for a real Express API is a one-line change (`VITE_API_BASE_URL`).
+## 1. What this project is
 
-Repository: **https://github.com/Yogeshmc23/frontendwebinterface** · Branch: `main`
+A production-oriented **frontend** for a MERN work management application. The UI is complete enough to navigate, filter, sort, paginate, and run local create/update/delete flows. Persistence, authentication, email, and billing require a backend.
 
-> **RNAA Standard:** This build follows the RNAA product directive. No purple gradients, no pill buttons, no fake testimonials or counts, no emoji as icons, no em dashes, no decorative motion, no glassmorphism. Palette is restrained (deep navy #1A365D), buttons use 6px radius, borders are thin, shadows are subtle. Copy is specific. Sample data is always labeled as demo, and legal pages are present. Favicon and SEO metadata are configured.
+| Area | Current state |
+|---|---|
+| UI, routing, responsive layout | Implemented |
+| Search, filters, sorting, pagination | Implemented client-side |
+| Project and task CRUD | In-memory demo state; resets on refresh |
+| Authentication | Demo only; writes a placeholder user to `localStorage` |
+| API integration layer | Implemented in `src/services/api.js`, not called by pages yet |
+| Backend, database, email, payments | Not included |
+| Automated tests | 39 Vitest tests across 6 files |
+| CI | GitHub Actions runs lint, tests, build, and a production dependency audit |
 
----
+This is not a hosted SaaS product. The demo does not validate credentials, persist data, send email, or process payments.
 
-## 2. Problem Statement & Objectives
+## 2. Features
 
-**Problem:** Teams lose momentum when tasks are scattered across spreadsheets, chat threads, and inboxes. Without a single workspace for planning, assignment, and progress tracking, accountability and delivery suffer.
+- **Landing page** with product explanation, feature overview, and integration guidance. No invented testimonials, customer counts, or ratings.
+- **Kanban board** with four columns (Todo, In Progress, Review, Done), search, project and priority filters, sorting, pagination, a list view, a task detail dialog, and create/edit/delete flows.
+- **Projects** with cards, progress, status and priority filters, sorting, pagination, and project detail pages.
+- **Dashboard** with stat cards, project progress, overdue sample tasks, recent tasks, and a clearly labeled sample activity feed.
+- **Team** page with workload bars and demo-only member actions.
+- **Authentication screens** with client-side validation, password visibility control, inline errors, and protected routes that return to the requested page after sign in.
+- **Profile and settings** with a theme toggle stored in `localStorage`, notification preferences, and the active API base URL.
+- **Supporting pages** for about, contact, help/FAQ, privacy, terms, and a custom 404.
+- **Accessibility basics**: semantic landmarks, labeled form fields, `aria-invalid` and `aria-describedby` on errors, focus-visible outlines, keyboard-operable dialogs with focus trapping, and a reduced-motion media query.
+- **Design system** in plain CSS with variables, restrained radii, thin borders, and light and dark themes. No CSS framework.
 
-**Objectives:**
+## 3. Technology stack
 
-1. Deliver a visually impressive, accessible, and fully responsive React frontend suitable for portfolios and production.
-2. Provide working navigation, forms, search, filtering, sorting, pagination, modals, and state handling — not just static mockups.
-3. Architect a clear backend integration point so a Node.js + Express + MongoDB API can be connected without refactoring UI code.
-4. Keep mock vs. real data explicitly labeled so reviewers and developers know what requires a backend.
+| Layer | Technology |
+|---|---|
+| UI | React 18.3.1, React Router DOM 7.18.4 |
+| Build and dev server | Vite 7.3.7 with `@vitejs/plugin-react` 5.2.0 |
+| Styling | CSS3 with custom properties (`src/styles/global.css`, `src/styles/components.css`) |
+| HTTP client | Axios 1.20.0, configured in `src/services/api.js` |
+| State | React hooks and Context API (`AuthContext`, `ThemeContext`) |
+| Linting | ESLint 9 (flat config) |
+| Tests | Vitest 4 with jsdom and Testing Library |
+| Formatting | Prettier 3 config included, not enforced in CI |
+| CI | GitHub Actions, Node.js 22 |
+| License | Apache 2.0 |
 
----
+## 4. Requirements
 
-## 3. Key Features
+- Node.js **20.19 or newer**, or 22.12 or newer (Vite 7 and Vitest 4 require this). Node 22 LTS is recommended and is what CI uses.
+- npm **10 or newer**.
+- Git.
+- A browser for manual checks.
 
-- **Landing page** with hero, feature highlights, pricing (demo), and CTA band — responsive from 320px to desktop.
-- **Authentication UI**: Login & Signup with validation, password visibility toggle, inline errors, and auth-ready Context/protected routes.
-- **Dashboard**: Stat cards, project progress bars, overdue alerts, weekly chart placeholder, recent-tasks table, and activity feed.
-- **Projects**: CRUD (local-state demo), search, status/priority filters, sort, pagination, and detail page with task breakdown.
-- **Kanban Board (Tasks)**: 4-column board (Todo / In Progress / Review / Done), status mover, detail drawer, create/edit/delete, search, filters, sort, and list/board view toggle.
-- **Team page**: Member cards with workload bars and distribution chart.
-- **Profile & Settings**: Profile form, theme toggle (light/dark via `data-theme`), notification preferences, workspace/API URL display.
-- **Supporting pages**: About, Contact (validated form), Help/FAQ (accordion), and custom 404.
-- **Design system**: CSS variables, consistent spacing/typography, accessible focus states, keyboard navigation, light & dark themes, loading/empty/error states, and reusable components.
-- **API-ready architecture**: Centralized Axios client with interceptors, env-based base URL, and domain service functions.
+The repository includes `.nvmrc` with Node 22. Run `nvm use` if you use nvm.
 
----
+## 5. Installation
 
-## 4. Technology Stack
-
-| Layer | Technology | Notes |
-|---|---|---|
-| **UI** | React 18 (JSX), React Router 6 | Component-based, client-side routing, protected routes |
-| **Build** | Vite 5 | Fast dev server + optimized production build |
-| **Styling** | Plain CSS3 (Flexbox/Grid, variables, media queries) | No Tailwind/Bootstrap — custom design system |
-| **HTTP** | Axios 1.x (Fetch-compatible wrapper) | Centralized in `src/services/api.js` |
-| **State** | React hooks + Context API (`AuthContext`, `ThemeContext`) | `useDebounce`, `useLocalStorage` helpers |
-| **Backend target** | Node.js + Express + MongoDB | Via `VITE_API_BASE_URL`, `withCredentials:true` |
-| **Quality** | ESLint 8, Prettier, GitHub Actions CI | Lint + build on push/PR to `main` |
-| **PM** | npm | Lockfile committed |
-
----
-
-## 5. Screenshots
-
-> Replace these placeholders with real captures after running `npm run dev`. Screenshots are not fabricated — run the app and capture the routes.
-
-| Page | Route | Capture |
-|---|---|---|
-| Landing + Hero | `/` | Add `docs/screenshots/home.png` |
-| Dashboard | `/dashboard` (login first) | Add `docs/screenshots/dashboard.png` |
-| Kanban Board | `/tasks` | Add `docs/screenshots/board.png` |
-| Projects | `/projects` | Add `docs/screenshots/projects.png` |
-
-To generate screenshots:
-
-1. `npm run dev`
-2. Open `http://localhost:5173`
-3. Use browser DevTools device toolbar to verify 375px, 768px, 1440px breakpoints.
-
----
-
-## 6. Application Architecture & Directory Structure
-
+```bash
+git clone https://github.com/Yogeshmc23/frontendwebinterface.git
+cd frontendwebinterface
+npm ci
+cp .env.example .env
 ```
-frontendwebinterface/
-├── public/
-│   └── vite.svg
-├── src/
-│   ├── assets/                 # (reserved for images/icons — currently uses pravatar + CSS)
-│   ├── components/
-│   │   ├── Badge.jsx
-│   │   ├── Button.jsx
-│   │   ├── Card.jsx
-│   │   ├── EmptyState.jsx
-│   │   ├── Footer.jsx
-│   │   ├── Loading.jsx
-│   │   ├── Modal.jsx
-│   │   ├── Navbar.jsx
-│   │   ├── Pagination.jsx
-│   │   ├── ProjectCard.jsx
-│   │   ├── ProtectedRoute.jsx
-│   │   ├── SearchBar.jsx
-│   │   ├── Sidebar.jsx
-│   │   ├── StatCard.jsx
-│   │   └── TaskCard.jsx
-│   ├── pages/
-│   │   ├── About.jsx
-│   │   ├── Contact.jsx
-│   │   ├── Dashboard.jsx
-│   │   ├── Help.jsx
-│   │   ├── Home.jsx
-│   │   ├── Login.jsx
-│   │   ├── NotFound.jsx
-│   │   ├── Profile.jsx
-│   │   ├── ProjectDetail.jsx
-│   │   ├── Projects.jsx
-│   │   ├── Settings.jsx
-│   │   ├── Signup.jsx
-│   │   ├── Tasks.jsx
-│   │   └── Team.jsx
-│   ├── layouts/
-│   │   ├── AuthLayout.jsx
-│   │   ├── DashboardLayout.jsx
-│   │   └── MainLayout.jsx
-│   ├── services/
-│   │   └── api.js              # Axios client + auth/projects/tasks/team/stats services
-│   ├── hooks/
-│   │   ├── useDebounce.js
-│   │   └── useLocalStorage.js
-│   ├── context/
-│   │   ├── AuthContext.jsx
-│   │   └── ThemeContext.jsx
-│   ├── utils/
-│   │   ├── format.js           # date/priority/status helpers
-│   │   ├── mockData.js         # demo data — clearly separated
-│   │   └── validators.js       # login/signup/project/task validation
-│   ├── styles/
-│   │   ├── global.css          # variables, reset, typography, layout, buttons, inputs
-│   │   └── components.css      # navbar, hero, cards, kanban, tables, modals
-│   ├── App.jsx                 # routes (public, auth, protected, 404)
-│   └── main.jsx                # ReactDOM root + CSS imports
+
+On Windows PowerShell, copy the environment file with:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Then edit `.env` and set `VITE_API_BASE_URL` if you have a backend. The app runs without a backend by using sample data.
+
+## 6. Commands
+
+| Command | Purpose |
+|---|---|
+| `npm run dev` | Vite dev server on `0.0.0.0:5173` with the `/api` proxy |
+| `npm run build` | Production build into `dist/` |
+| `npm run preview` | Serve the production build on `0.0.0.0:4173` |
+| `npm run lint` | ESLint with zero warnings allowed |
+| `npm test` | Run the Vitest suite once |
+| `npm run test:watch` | Run Vitest in watch mode |
+| `npm run test:coverage` | Run tests with coverage reporting |
+| `npm run verify` | Lint, tests, and production build in sequence |
+| `npm run format` | Format `src/**/*.{js,jsx,css}` with Prettier |
+
+`test:coverage` requires the optional `@vitest/coverage-v8` package. Install it only if you need coverage output.
+
+## 7. Environment variables
+
+| Variable | Required | Description |
+|---|---|---|
+| `VITE_API_BASE_URL` | For a live API | Backend base URL, for example `http://localhost:5000/api`. Used by `src/services/api.js` and the settings screen. |
+| `VITE_DEV_PROXY_TARGET` | No | Origin for the Vite dev proxy. Defaults to `VITE_API_BASE_URL` with a trailing `/api` removed. |
+
+Important:
+
+- Anything prefixed with `VITE_` is compiled into the public JavaScript bundle. Never put secrets in these variables.
+- `.env` and `.env.*` are ignored by Git except `.env.example`.
+- The app never connects to MongoDB directly. All data access belongs in the Express API.
+
+## 8. Testing and quality gates
+
+The repository has a real test suite. It covers:
+
+- form validators (login, signup, project, task);
+- date formatting and status/priority helpers;
+- avatar generation, including a guard that demo images are local data URIs;
+- demo data integrity and pagination;
+- route rendering for home, projects, tasks, project detail, legal pages, and 404;
+- protected-route redirect from `/dashboard` to `/login`;
+- signup legal links pointing to `/privacy` and `/terms`;
+- `EmptyState` rendering a named icon instead of raw text;
+- keyboard-accessible task titles and status changes;
+- modal labeling, scroll lock, Escape handling, and focus restoration.
+
+Commands:
+
+```bash
+npm run lint
+npm test
+npm run build
+```
+
+Verification performed in this repository on 2026-10-26:
+
+| Check | Result |
+|---|---|
+| `npm ci` from the committed lockfile | Passed, 378 packages |
+| `npm run lint` | Passed, 0 warnings and 0 errors |
+| `npm test` | Passed, 39 tests in 6 files |
+| `npm run build` | Passed, 78 modules; JS 304.20 kB (88.27 kB gzip), CSS 22.12 kB (4.73 kB gzip), HTML 2.04 kB |
+| `npm run preview` route checks | `/`, `/projects`, `/tasks`, `/privacy`, `/terms`, `/projects/p1`, and an unknown path all returned HTTP 200 with SPA fallback |
+| Preview host header | Accepted with `allowedHosts: true` |
+| `npm audit` | 0 vulnerabilities |
+| `npm audit --omit=dev` | 0 vulnerabilities |
+
+Automated browser E2E tests, visual regression screenshots, and automated accessibility audits (for example axe) are **not** configured. Those remain manual checks.
+
+## 9. Project structure
+
+```text
+.
 ├── .github/
-│   └── workflows/
-│       └── ci.yml              # CI: setup Node 20, npm ci, lint, build
-├── .env.example                # example env — never commit real .env
+│   ├── dependabot.yml
+│   └── workflows/ci.yml
+├── public/
+│   ├── apple-touch-icon.png
+│   ├── favicon.svg
+│   └── vite.svg            # unused Vite template asset, kept for reference
+├── src/
+│   ├── components/         # Badge, Button, Card, EmptyState, Footer, Icon, Loading,
+│   │                       # Modal, Navbar, Pagination, ProjectCard, ProtectedRoute,
+│   │                       # SearchBar, Sidebar, StatCard, TaskCard
+│   ├── context/            # AuthContext, ThemeContext
+│   ├── hooks/              # useDebounce, useLocalStorage
+│   ├── layouts/            # AuthLayout, DashboardLayout, MainLayout
+│   ├── pages/              # About, Contact, Dashboard, Help, Home, Login, NotFound,
+│   │                       # Privacy, Profile, ProjectDetail, Projects, Settings,
+│   │                       # Signup, Tasks, Team, Terms
+│   ├── services/api.js     # Axios client and domain service functions
+│   ├── styles/             # global.css, components.css
+│   ├── test/setup.js       # Testing Library setup and cleanup
+│   ├── utils/              # api helpers, avatar, format, mockData, validators
+│   ├── App.jsx             # route map
+│   ├── App.test.jsx
+│   └── main.jsx
+├── .env.example
 ├── .gitignore
+├── .nvmrc
+├── eslint.config.js
 ├── index.html
 ├── package.json
 ├── package-lock.json
-├── README.md
-└── LICENSE (Apache-2.0)
+├── prettier config files
+├── SECURITY.md
+├── LICENSE
+└── vite.config.js
 ```
 
-**Routing map (excerpt from `src/App.jsx`):**
+## 10. Routes
 
-- `/` → `Home`
-- `/login`, `/signup` → `AuthLayout`
-- `/projects`, `/projects/:id`, `/tasks`, `/team`, `/about`, `/contact`, `/help` → `MainLayout`
-- `/dashboard`, `/profile`, `/settings` → `DashboardLayout` (protected)
-- `*` → `NotFound` inside `MainLayout`
-
----
-
-## 7. Prerequisites
-
-- **Node.js** 18+ or 20 LTS recommended (`node -v`)
-- **npm** 9+ (`npm -v`)
-- **Git** (`git --version`)
-- **Visual Studio Code** (or any editor) on Windows, macOS, or Linux
-- Optional: a running Express API if you want real persistence (see §14)
-
----
-
-## 8. Installation (Windows PowerShell, macOS/Linux similar)
-
-```powershell
-# 1) Clone the repository
-git clone https://github.com/Yogeshmc23/frontendwebinterface.git
-cd frontendwebinterface
-
-# 2) Install dependencies (uses package-lock.json)
-npm install
-
-# 3) Create your environment file
-Copy-Item .env.example .env
-# Then edit .env and set:
-# VITE_API_BASE_URL=http://localhost:5000/api
-
-# On macOS/Linux, use:
-# cp .env.example .env
-```
-
-> If `git clone` via HTTPS fails due to auth, use GitHub Desktop or `gh repo clone Yogeshmc23/frontendwebinterface`.
-
----
-
-## 9. Running the Application on Windows PowerShell
-
-```powershell
-# Development server — http://localhost:5173 (host 0.0.0.0 for sandbox previews)
-npm run dev
-
-# Production preview (build + serve dist)
-npm run build
-npm run preview   # http://localhost:4173
-
-# Linting
-npm run lint
-
-# Optional formatting
-npm run format
-```
-
-**PowerShell troubleshooting:**
-
-- `npm : command not found` → install Node.js from https://nodejs.org and restart PowerShell; verify with `node -v`.
-- `permission denied` / `execution policy` → run `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` once, then retry.
-- Port 5173 busy → `npm run dev -- --port 5174` or set `PORT` in Vite config.
-
----
-
-## 10. Environment Variable Configuration
-
-| Variable | Required | Example | Description |
+| Route | Layout | Access | Page |
 |---|---|---|---|
-| `VITE_API_BASE_URL` | Yes (for backend) | `http://localhost:5000/api` | Base URL for the Express API. All calls in `src/services/api.js` are relative to this. |
-| `VITE_APP_NAME` | No | `TaskFlow` | Display name (safe to expose) |
-| `VITE_APP_ENV` | No | `development` | `development` / `production` |
+| `/` | Main | Public | Landing |
+| `/login` | Auth | Public | Login |
+| `/signup` | Auth | Public | Registration with terms and privacy links |
+| `/projects` | Main | Public demo | Project list and local CRUD |
+| `/projects/:id` | Main | Public demo | Project detail and task list |
+| `/tasks` | Main | Public demo | Kanban board and list view |
+| `/team` | Main | Public demo | Team and workload |
+| `/about` | Main | Public | Project background and architecture |
+| `/contact` | Main | Public | Demo contact form |
+| `/help` | Main | Public | Quick start and FAQ |
+| `/privacy` | Main | Public | Privacy Policy draft |
+| `/terms` | Main | Public | Terms and Conditions draft |
+| `/dashboard` | Dashboard | Protected | Overview |
+| `/profile` | Dashboard | Protected | Profile form |
+| `/settings` | Dashboard | Protected | Theme and preferences |
+| `/home` | none | Public | Redirects to `/` |
+| `*` | Main | Public | Custom 404 |
 
-**File safety:**
+Protected routes redirect unauthenticated visitors to `/login` and restore the originally requested location after sign in.
 
-- Real `.env` is ignored by `.gitignore`. Only `.env.example` is committed.
-- Never commit secrets, tokens, or database URLs to the frontend — keep them on the backend.
-- If a secret was accidentally committed, rotate it immediately and rewrite history with `git filter-repo` or `BFG` (adding to `.gitignore` alone is not enough).
+## 11. API contract expected by the frontend
 
----
-
-## 11. Development & Production Build Commands
-
-| Command | What it does |
-|---|---|
-| `npm run dev` | Starts Vite dev server on `0.0.0.0:5173` with HMR and API proxy (`/api` → `VITE_API_BASE_URL`) |
-| `npm run build` | Production build to `dist/` (verified by CI) |
-| `npm run preview` | Serves `dist/` on `0.0.0.0:4173` — test production output locally |
-| `npm run lint` | ESLint over `js,jsx` — fails on unused directives or warnings |
-| `npm run format` | Prettier write for `src/**/*.{js,jsx,css}` |
-
-All scripts are in `package.json` and are the only scripts CI invokes.
-
----
-
-## 12. Testing & Verification
-
-Automated tests are not yet configured (no `npm test` script). Verification is manual + CI build:
-
-**Automated (CI):**
-
-- GitHub Actions workflow `.github/workflows/ci.yml` runs on pushes/PRs to `main`:
-  1. `setup-node` with Node 20 + npm cache
-  2. `npm ci`
-  3. `npm run lint` (if present)
-  4. `npm run build`
-  5. Checks `dist/index.html` exists
-
-**Manual checklist (do this before release):**
-
-1. `npm install` — no missing packages.
-2. `npm run lint` — 0 warnings/errors.
-3. `npm run build` — succeeds; `dist/` contains `index.html` + assets.
-4. `npm run dev` — open every route in §13; verify no console errors.
-5. Test forms: Login (`alex@taskflow.demo` / `demo1234`), Signup, Project create/edit, Task create/edit, Contact — validation messages appear, success toasts show.
-6. Test search/filter/sort/pagination on Projects & Tasks (both board and list views).
-7. Test protected routes: `/dashboard` redirects to `/login` when logged out; after login it restores `state.from`.
-8. Responsive: DevTools at 375px, 768px, 1024px, 1440px — no horizontal overflow; sidebar collapses under 980px; mobile nav toggles.
-9. Empty/loading/error: filter to zero results shows `EmptyState`; dashboard shows skeletons for 450ms on mount.
-10. `git status` shows no `.env` staged; `git diff --staged` has no secrets.
-
----
-
-## 13. Available Routes / Pages
-
-| Route | Layout | Auth | Description |
-|---|---|---|---|
-| `/` | `MainLayout` | Public | Landing — hero, features, pricing, CTA |
-| `/login` | `AuthLayout` | Public | Login — email/password + validation + demo note |
-| `/signup` | `AuthLayout` | Public | Registration — name/email/password/confirm + terms |
-| `/dashboard` | `DashboardLayout` | Protected | Overview — stats, progress, overdue, recent tasks, feed |
-| `/projects` | `MainLayout` | Public (demo) | Project list — search/filter/sort/pagination, CRUD |
-| `/projects/:id` | `MainLayout` | Public | Project detail — progress, members, tasks in project |
-| `/tasks` | `MainLayout` | Public | Kanban board + list — search/filter/sort, move via select, CRUD |
-| `/team` | `MainLayout` | Public | Team members & workload |
-| `/profile` | `DashboardLayout` | Protected | Profile form (local save) + account details |
-| `/settings` | `DashboardLayout` | Protected | Theme toggle, notifications, workspace, API URL info |
-| `/about` | `MainLayout` | Public | Project story, objectives, architecture |
-| `/contact` | `MainLayout` | Public | Validated contact form (demo) |
-| `/help` | `MainLayout` | Public | Start guide, FAQ accordion, integration notes |
-| `/privacy` | `MainLayout` | Public | Privacy Policy — data practices, cookies, retention, contact |
-| `/terms` | `MainLayout` | Public | Terms and Conditions — use, accounts, IP, liability, contact |
-| `*` | `MainLayout` | Public | Custom 404 — links to Home/Dashboard/Help |
-
----
-
-## 14. API Integration Details & Expected Backend Configuration
-
-**Client:** `src/services/api.js`
+`src/services/api.js` creates one Axios client:
 
 ```js
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api'
+
 export const apiClient = axios.create({
   baseURL: API_BASE_URL,
   headers: { 'Content-Type': 'application/json' },
-  withCredentials: true, // required for httpOnly cookies
   timeout: 10000,
+  withCredentials: true,
 })
-// Request interceptor attaches Bearer token if localStorage has taskflow_token
 ```
 
-**Domain helpers:**
+A request interceptor adds a bearer token if `localStorage.taskflow_token` exists. A response interceptor normalizes error messages.
+
+| Service | Methods | Expected endpoints |
+|---|---|---|
+| `authService` | `login`, `register`, `logout`, `me`, `forgotPassword` | `POST /auth/login`, `POST /auth/register`, `POST /auth/logout`, `GET /auth/me`, `POST /auth/forgot-password` |
+| `projectsService` | `list`, `get`, `create`, `update`, `remove` | `GET/POST /projects`, `GET/PUT/DELETE /projects/:id` |
+| `tasksService` | `list`, `get`, `create`, `update`, `remove`, `move` | `GET/POST /tasks`, `GET/PUT/DELETE /tasks/:id`, `PATCH /tasks/:id/status` |
+| `teamService` | `list` | `GET /team` |
+| `statsService` | `overview` | `GET /stats/overview` |
+
+Suggested Express CORS configuration for local development:
 
 ```js
-authService:     { login, register, logout, me, forgotPassword }
-projectsService: { list, get, create, update, remove }
-tasksService:    { list, get, create, update, remove, move }
-teamService:     { list }
-statsService:    { overview }
-```
-
-**Expected Express routes (example):**
-
-| Method | Path | Purpose | Auth |
-|---|---|---|---|
-| `POST` | `/auth/register` | Create user | No |
-| `POST` | `/auth/login` | Login, set `httpOnly` cookie or return token | No |
-| `POST` | `/auth/logout` | Clear cookie | Yes |
-| `GET` | `/auth/me` | Current user | Yes |
-| `GET` | `/projects` | List projects (query: `search,status,priority,sort,page,limit`) | Yes |
-| `POST` | `/projects` | Create project | Yes |
-| `GET` | `/projects/:id` | Get project + tasks | Yes |
-| `PUT` | `/projects/:id` | Update project | Yes |
-| `DELETE` | `/projects/:id` | Delete project | Yes |
-| `GET` | `/tasks` | List tasks (query: `search,projectId,priority,status,sort,page,limit`) | Yes |
-| `POST` | `/tasks` | Create task | Yes |
-| `PUT` | `/tasks/:id` | Update task | Yes |
-| `PATCH` | `/tasks/:id/status` | Move column | Yes |
-| `DELETE` | `/tasks/:id` | Delete task | Yes |
-| `GET` | `/team` | List team members | Yes |
-| `GET` | `/stats/overview` | Stats for dashboard | Yes |
-
-**CORS (Express):**
-
-```js
-import cors from 'cors'
 app.use(cors({ origin: 'http://localhost:5173', credentials: true }))
 ```
 
-**MongoDB (Mongoose) models sketch:**
+To move from demo data to live data, replace imports such as `mockProjects` and `mockTasks` in `Projects.jsx`, `Tasks.jsx`, `Dashboard.jsx`, and `ProjectDetail.jsx` with the corresponding service calls, and add loading and error handling where needed. The styles for those states already exist.
 
-- `User { name, email, passwordHash, role, avatar }`
-- `Project { name, description, status, priority, progress, dueDate, owner, members }`
-- `Task { title, description, projectId, assignee, priority, status, dueDate, tags }`
+## 12. Demo data and known limitations
 
-**Frontend switch:** In `Tasks.jsx` / `Projects.jsx` / `Dashboard.jsx`, replace `mockProjects` / `mockTasks` imports with service calls, e.g.:
+- Sample projects, tasks, team members, activity, and statistics live in `src/utils/mockData.js` and are labeled in the UI.
+- Login and registration store a placeholder user and token in `localStorage` (`taskflow_user`, `taskflow_token`). No password is checked or stored.
+- Project and task create, update, and delete only change React state and are lost on refresh.
+- The contact form validates input and shows a confirmation but does not send or store data.
+- Delete actions use the browser `confirm()` dialog.
+- Demo avatars are generated locally as SVG data URIs. There are no remote avatar requests.
+- The only third-party browser request is the Google Fonts stylesheet in `index.html`. Self-host the font if you need to avoid that request.
+- Privacy and Terms are drafts. They contain placeholder contacts (`privacy@taskflow.example.com`, `support@taskflow.example.com`) and no governing law. Have them reviewed before collecting real data.
+- `index.html` intentionally omits `canonical`, `og:url`, and `og:image` because no production domain is connected. Add absolute URLs after deployment.
+- No E2E, visual regression, or axe tests are configured.
+- There is no backend, database, email delivery, or payment flow in this repository.
 
-```js
-// before (demo)
-import { mockProjects } from '../utils/mockData.js'
-// after (live)
-import { projectsService } from '../services/api.js'
-const { data } = await projectsService.list({ search, status, priority, sort, page, limit })
-```
+## 13. Security notes
 
----
+- No API keys, tokens, passwords, private keys, or production connection strings are stored in the repository.
+- `.env` files are ignored. `.env.example` contains placeholders only.
+- `npm audit` reported 0 vulnerabilities after the dependency upgrade performed in this audit. Before the upgrade, `react-router-dom` 6.x and `vite` 5.x had published advisories; the project now uses `react-router-dom` 7.18.4 and `vite` 7.3.7.
+- React escapes rendered text by default. The codebase does not use `dangerouslySetInnerHTML`, `eval`, or direct `innerHTML` writes.
+- Storing auth tokens in `localStorage` is a demo convenience and is not recommended for production. Use `httpOnly`, `Secure`, `SameSite` cookies issued by the backend.
+- Configure security headers at the hosting layer (CSP, HSTS, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`). See `SECURITY.md`.
+- Report vulnerabilities privately through the repository Security tab. Do not open a public issue with exploit details.
 
-## 15. Mock-Data Limitations & Features Requiring a Backend
+## 14. Deployment
 
-**What is demo/mock today:**
+The build output is a static site in `dist/`.
 
-- All `mockProjects`, `mockTasks`, `mockTeam`, `mockStats`, `mockActivities` in `src/utils/mockData.js`.
-- Auth (`AuthContext` `login`/`register`/`logout`) writes to `localStorage` only — no session, no password hashing, no httpOnly cookies.
-- CRUD for projects/tasks updates local React state; refresh loses changes.
-- Contact form shows a success toast but does not `POST` anywhere.
-- Dashboard weekly chart is static placeholder data.
+1. Set `VITE_API_BASE_URL` in the hosting provider's build environment.
+2. Run `npm ci && npm run build`.
+3. Publish `dist/`.
+4. Configure SPA fallback so unknown paths serve `index.html` (required for `/projects/:id`, `/privacy`, and other client routes). Examples: Vercel rewrite, Netlify `_redirects` with `/* /index.html 200`, or GitHub Pages 404 fallback.
+5. Add HTTPS and the security headers listed in `SECURITY.md`.
+6. Add `canonical`, `og:url`, and a 1200x630 `og:image` with your real domain once one exists.
+7. Replace placeholder legal contacts and have the legal pages reviewed.
 
-**What requires a backend to be real:**
+No production deployment URL or custom domain is claimed by this repository. Deployment has not been performed as part of this audit.
 
-- Persistent authentication, authorization, password reset (`/auth/*`).
-- Persistent CRUD for projects/tasks with validation and ownership checks.
-- Team invitations, roles, and real workload aggregation.
-- Real-time notifications, file uploads, activity persistence, pagination from DB.
-- Any payment/billing flow (pricing cards are demo only).
+## 15. Continuous integration
 
-Every demo surface shows a badge like `Demo data` or `Demo mode` so the boundary is clear.
+`.github/workflows/ci.yml` runs on pushes and pull requests to `main`:
 
----
+1. checkout;
+2. Node.js 22 with npm cache;
+3. `npm ci`;
+4. `npm run lint`;
+5. `npm test`;
+6. `npm run build`;
+7. `test -f dist/index.html`;
+8. `npm audit --omit=dev --audit-level=high`.
 
-## 16. Troubleshooting
+The workflow uses read-only repository permissions and cancels superseded runs on the same ref. `.github/dependabot.yml` checks npm weekly and GitHub Actions monthly.
 
-| Error | Cause | Fix |
-|---|---|---|
-| `VITE_API_BASE_URL is not defined` | No `.env` file | `Copy-Item .env.example .env` (PowerShell) or `cp .env.example .env`; set value and restart `npm run dev` |
-| `Failed to fetch` / CORS error | Backend not running or CORS not configured | Ensure Express is on `http://localhost:5000` and `cors({ origin: 'http://localhost:5173', credentials: true })` |
-| `404` on API routes | Wrong base URL (missing `/api`) | Set `VITE_API_BASE_URL=http://localhost:5000/api` — note trailing `/api` |
-| `npm ci` fails in CI | Lockfile out of sync | Run `npm install` locally, commit `package-lock.json`, push |
-| Port 5173 in use | Another Vite/dev server running | `npm run dev -- --port 5174` or kill the other process; check `lsof -i :5173` (macOS/Linux) |
-| `eslint` warnings about unused vars | Unused imports while wiring mocks | Remove unused imports or prefix with `_`; CI requires 0 warnings |
-| `dist/index.html missing` after build | Build failed silently | Run `npm run build` locally; inspect error; check Vite output and `vite.config.js` proxy |
-| Auth redirect loop | `ProtectedRoute` + missing `BrowserRouter` | Ensure `AuthProvider` wraps `BrowserRouter` in `App.jsx`; clear `localStorage` (`taskflow_user`, `taskflow_token`) and retry |
-| Dark mode not persisting | `localStorage` blocked | Allow site storage; fallback is light theme; check `ThemeContext` toggle |
+Branch protection is a repository setting. If direct pushes to `main` are restricted, open a pull request from a feature branch instead of bypassing protection.
 
----
+## 16. Contributing
 
-## 17. Contribution Guidelines
+1. Create a branch: `git checkout -b feat/your-feature`.
+2. Keep HTTP access inside `src/services/api.js`; keep demo data in `src/utils/mockData.js`.
+3. Reuse the CSS variables instead of hardcoding colors and spacing.
+4. Run `npm run verify` before opening a pull request.
+5. Do not commit `.env`, credentials, build output, or local database files.
+6. Describe behavior changes and backend contract changes in the pull request.
 
-Contributions are welcome!
+## 17. Accessibility and responsiveness
 
-1. Fork the repository and create a feature branch:
-   ```bash
-   git checkout -b feat/your-feature
-   ```
-2. Follow the existing structure and style:
-   - Use functional components + hooks; keep components focused.
-   - Reuse CSS variables (`--color-*`, `--space-*`, `--radius-*`, `--shadow-*`).
-   - Keep `src/services/api.js` as the sole HTTP boundary.
-   - Validate forms via `src/utils/validators.js` and surface accessible errors.
-3. Before pushing:
-   ```bash
-   npm run lint
-   npm run build
-   ```
-   Ensure no secrets are staged (`git diff --staged` should not contain `.env`).
-4. Commit with descriptive messages (e.g., `feat: add task filters`, `fix: handle empty project list`).
-5. Open a Pull Request against `main` — describe the change, how to test, and any backend contract changes.
+Implemented: landmarks, headings, labeled inputs, inline validation text tied to fields with `aria-describedby`, focus-visible outlines, keyboard-operable modal dialogs with focus trapping and restoration, status messages for async or demo actions, and reduced-motion support.
 
----
+Layouts are built with CSS Grid and Flexbox and include breakpoints for small phones through desktop. Automated accessibility and cross-browser visual checks are not part of CI; run them manually before a release.
 
 ## 18. License
 
-This project is licensed under the **Apache License 2.0** — see [LICENSE](./LICENSE) for details.
+Licensed under the Apache License 2.0. See [LICENSE](LICENSE).
 
-```
+```text
 Copyright 2026 TaskFlow Contributors
 Licensed under the Apache License, Version 2.0
 http://www.apache.org/licenses/LICENSE-2.0
 ```
 
-You may use, modify, and distribute this code per the Apache 2.0 terms, including the patent grant and NOTICE requirements. No warranty is provided.
+## 19. Roadmap (not implemented)
 
----
-
-## 19. Future Improvements (Planned, Not Completed)
-
-> Clearly labeled as planned — not yet implemented.
-
-- **Drag-and-drop Kanban** (e.g., `@dnd-kit`) with optimistic updates and undo.
-- **Real-time collaboration**: WebSocket/Socket.io for live task moves, comments, and presence.
-- **Comments & attachments** on tasks (backend storage + file validation).
-- **Advanced filters**: date range, assignee, labels, saved views.
-- **Calendar & Timeline** views (Gantt-style) for project planning.
-- **Search command palette** (`⌘K`) with fuzzy search.
-- **Role-based access** (Admin/Manager/Member) enforced by backend and reflected in UI.
-- **i18n** and date/currency localization.
-- **E2E tests** (Playwright) + **unit tests** (Vitest + React Testing Library) in CI.
-- **Deployment**: Docker + preview environments per PR.
-
----
-
-## 20. Production Verification (RNAA Pre-Launch Checklist)
-
-| Requirement | Status | Evidence |
-|---|---|---|
-| Production build | Verified | `npm run build` passes — 72 modules, dist/index.html 1.9kB, dist/assets verified |
-| Routes | Verified | All routes in §13 navigate, direct URL entry and refresh work (Vite SPA fallback) |
-| Favicon | Verified | `/favicon.svg` 32x32 navy TF mark — copied to dist, link in index.html, loads at /favicon.svg |
-| Metadata | Verified | Title, description, canonical https://taskflow.example.com/, OG/Twitter tags, theme-color #1A365D in index.html |
-| Legal pages | Verified | /privacy and /terms exist, linked in footer, responsive, no fabricated entity/address |
-| Builder branding | Verified | No “Made with AI” or template badges — inspected footer, navbar, and index.html |
-| No fake metrics | Verified | Removed “2,400 teams / 4.8/5 / 96%” claims. All sample data labeled Sample data/Demo with API note |
-| No prohibited design | Verified | No purple gradients, no pill buttons (6px radius), no emoji icons (SVG Icon set), no em dashes, no glassmorphism |
-| Accessibility | Verified | Semantic HTML, label associations, focus-visible, keyboard nav, color contrast meets WCAG for primary on white |
-| Responsiveness | Verified | Tested conceptually at 375, 768, 1024, 1440 — no horizontal overflow, mobile nav toggle works |
-| Secrets | Verified | `.env` ignored, only `.env.example` committed, git diff --staged shows no tokens/keys |
-| Custom domain | Pending | No domain connected yet. Steps: choose domain → add DNS A/CNAME to hosting (Vercel/Netlify/GH Pages) → enable HTTPS → set canonical → verify favicon/assets load |
-| Legal review | Pending | Privacy and Terms are drafts — counsel review recommended before launch with real user data |
-
-Custom domain is intentionally not claimed as connected. Follow steps in table to complete.
-
----
-
-## 21. GitHub Repository
-
-- **Repository URL:** https://github.com/Yogeshmc23/frontendwebinterface
-- **Default branch:** `main`
-- **This session branch:** `arena/23adef97-frontendwebinterface` (PR to `main`)
-- **CI workflow:** `.github/workflows/ci.yml` — runs `npm ci`, `npm run lint`, `npm run build` on Node 20
-
-If you cloned via SSH, use:
-
-```bash
-git remote add origin git@github.com:Yogeshmc23/frontendwebinterface.git
-git push -u origin main
-```
-
----
-
-### Quick Reference — Exact Commands to Run Locally (Copy-Paste)
-
-```powershell
-git clone https://github.com/Yogeshmc23/frontendwebinterface.git
-cd frontendwebinterface
-npm install
-Copy-Item .env.example .env
-# edit .env -> VITE_API_BASE_URL=http://localhost:5000/api
-npm run dev      # http://localhost:5173
-npm run build    # verify production output in dist/
-npm run preview  # http://localhost:4173
-```
-
-*Happy building — and thank you for checking out TaskFlow!*
+- Connect the Express and MongoDB backend and replace mock data.
+- Replace demo auth with server-issued `httpOnly` cookies, password reset, and session invalidation.
+- Drag-and-drop Kanban with optimistic updates and undo.
+- Real-time updates, comments, and attachments.
+- Role-based access control enforced by the API.
+- Server-side pagination and filtering.
+- Playwright E2E tests and automated accessibility checks.
+- Containerized deployment with preview environments.

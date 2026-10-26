@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext.jsx'
+import { avatarFor } from '../utils/avatar.js'
 
 export default function Profile() {
   const { user } = useAuth()
@@ -10,6 +11,7 @@ export default function Profile() {
     bio: 'Building TaskFlow to help teams ship work faster. Focused on clarity, momentum, and craft.',
   })
   const [saved, setSaved] = useState(false)
+  const [notice, setNotice] = useState('')
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -17,24 +19,33 @@ export default function Profile() {
     setTimeout(() => setSaved(false), 2000)
   }
 
+  const avatar = user?.avatar || avatarFor(form.name || 'Guest')
+
   return (
     <div style={{ display: 'grid', gap: 16 }}>
       <div className="page-header">
         <div>
           <h1 className="page-title">Profile</h1>
-          <p className="page-subtitle">Manage your personal information. Demo saves locally wire to <code>PUT /users/me</code> for persistence.</p>
+          <p className="page-subtitle">Manage your personal information. Demo saves locally; wire to <code>PUT /users/me</code> for persistence.</p>
         </div>
         {saved && <span className="badge badge-success">Saved</span>}
       </div>
 
+      {notice && (
+        <div className="notice" role="status">
+          <span>{notice}</span>
+          <button type="button" className="btn btn-ghost btn-sm" onClick={() => setNotice('')}>Dismiss</button>
+        </div>
+      )}
+
       <div className="detail-grid">
         <form onSubmit={onSubmit} className="surface" style={{ padding: 18, display: 'grid', gap: 14 }}>
           <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
-            <img src={user?.avatar || 'https://i.pravatar.cc/200?img=32'} alt={user?.name} width={64} height={64} style={{ borderRadius: '50%', border: '2px solid var(--color-border)' }} />
+            <img src={avatar} alt="" width={64} height={64} style={{ borderRadius: '50%', border: '2px solid var(--color-border)' }} />
             <div>
               <div style={{ fontWeight: 800, fontSize: 16 }}>{user?.name}</div>
               <div className="small muted">{user?.email}</div>
-              <button type="button" className="btn btn-secondary btn-sm" style={{ marginTop: 8 }} onClick={() => alert('Demo: Upload avatar (requires backend storage)')}>Change photo</button>
+              <button type="button" className="btn btn-secondary btn-sm" style={{ marginTop: 8 }} onClick={() => setNotice('Avatar upload requires backend storage. Demo profiles use locally generated initials.')}>Change photo</button>
             </div>
           </div>
 
@@ -52,7 +63,7 @@ export default function Profile() {
           <div className="field">
             <label className="label" htmlFor="email">Email</label>
             <input id="email" type="email" className="input" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
-            <span className="help">We&apos;ll never share your email. Used for notifications via backend.</span>
+            <span className="help">We will never share your email. Used for notifications once a backend is connected.</span>
           </div>
 
           <div className="field">
@@ -72,12 +83,13 @@ export default function Profile() {
               <div style={{ display: 'flex', justifyContent: 'space-between' }}><span className="muted">Tasks completed</span><strong>184</strong></div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}><span className="muted">Status</span><span className="badge badge-success">Active</span></div>
             </div>
+            <p className="small muted" style={{ margin: 0, fontSize: 11.5 }}>These account counts are sample values, not live database records.</p>
           </div>
 
           <div className="surface" style={{ padding: 16, display: 'grid', gap: 10, borderColor: '#FECACA', background: 'var(--color-danger-soft)' }}>
             <h3 style={{ margin: 0, fontSize: 14, color: '#991B1B' }}>Danger zone</h3>
-            <p style={{ margin: 0, fontSize: 12, color: '#7F1D1D', lineHeight: 1.6 }}>Deleting your account removes all demo data locally. Backend should implement <code>DELETE /users/me</code>.</p>
-            <button className="btn btn-ghost btn-sm" style={{ color: 'var(--color-danger)', border: '1px solid #FECACA', background: 'white' }} onClick={() => alert('Demo: Delete account (requires backend)')}>Delete account</button>
+            <p style={{ margin: 0, fontSize: 12, color: '#7F1D1D', lineHeight: 1.6 }}>Deleting your account removes demo data locally. A backend should implement <code>DELETE /users/me</code> with confirmation and retention rules.</p>
+            <button type="button" className="btn btn-ghost btn-sm" style={{ color: 'var(--color-danger)', border: '1px solid #FECACA', background: 'white', width: 'fit-content' }} onClick={() => setNotice('Account deletion requires the backend. No data was deleted.')}>Delete account</button>
           </div>
         </div>
       </div>

@@ -29,7 +29,7 @@ export default function ProjectCard({ project, onEdit, onDelete }) {
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <div style={{ display: 'flex' }}>
             {project.members.map((m, i) => (
-              <img key={i} src={m} alt="member" width={26} height={26} style={{ borderRadius: '50%', border: '2px solid var(--color-surface)', marginLeft: i ? -6 : 0 }} />
+              <img key={i} src={m} alt="" width={26} height={26} style={{ borderRadius: '50%', border: '2px solid var(--color-surface)', marginLeft: i ? -6 : 0 }} />
             ))}
           </div>
           <span className="small muted">{project.tasksCount} tasks • Due {formatDate(project.dueDate)}</span>

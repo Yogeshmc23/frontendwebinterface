@@ -56,8 +56,8 @@ export default function Settings() {
           <h3 style={{ margin: 0, fontSize: 15 }}>Workspace</h3>
           <div className="field">
             <label className="label" htmlFor="ws">Workspace name</label>
-            <input id="ws" className="input" defaultValue="TaskFlow HQ" />
-            <span className="help">Visible to team members. Backend: <code>PUT /workspace</code></span>
+            <input id="ws" className="input" defaultValue="Sample Workspace" />
+            <span className="help">Demo workspace name. Backend: <code>PUT /workspace</code></span>
           </div>
           <div className="field">
             <label className="label" htmlFor="url">API Base URL</label>

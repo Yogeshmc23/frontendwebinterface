@@ -49,7 +49,7 @@ export default function Navbar() {
             <>
               <Link to="/dashboard" className="btn btn-secondary btn-sm hide-mobile">Dashboard</Link>
               <Link to="/profile" className="cluster hide-mobile" style={{ gap: 8, padding: '4px 8px', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)', background: 'var(--color-surface)' }}>
-                <img src={user?.avatar} alt={user?.name} width={24} height={24} style={{ borderRadius: '50%' }} />
+                <img src={user?.avatar} alt="" width={24} height={24} style={{ borderRadius: '50%' }} />
                 <span style={{ fontSize: 13, fontWeight: 600 }}>{user?.name?.split(' ')[0]}</span>
               </Link>
               <button className="btn btn-ghost btn-sm hide-mobile" onClick={handleLogout}>Sign out</button>
@@ -61,13 +61,13 @@ export default function Navbar() {
             </>
           )}
 
-          <button className="mobile-toggle" onClick={() => setOpen((v) => !v)} aria-label="Toggle navigation" aria-expanded={open}>
+          <button className="mobile-toggle" onClick={() => setOpen((v) => !v)} aria-label="Toggle navigation" aria-expanded={open} aria-controls="mobile-navigation">
             <Icon name={open ? 'close' : 'menu'} size={16} />
           </button>
         </div>
       </div>
 
-      <div className={`mobile-menu ${open ? 'open' : ''}`} role="dialog" aria-label="Mobile navigation">
+      <nav id="mobile-navigation" className={`mobile-menu ${open ? 'open' : ''}`} aria-label="Mobile navigation">
         {links.map((l) => (
           <NavLink key={l.to} to={l.to} className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')} onClick={() => setOpen(false)}>
             {l.label}
@@ -86,7 +86,7 @@ export default function Navbar() {
             <Link to="/signup" className="btn btn-primary" onClick={() => setOpen(false)}>Create account</Link>
           </>
         )}
-      </div>
+      </nav>
     </header>
   )
 }

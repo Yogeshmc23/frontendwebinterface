@@ -8,6 +8,7 @@ import { mockProjects, mockTasks as initialTasks } from '../utils/mockData.js'
 import { useDebounce } from '../hooks/useDebounce.js'
 import { validateTask } from '../utils/validators.js'
 import { formatDate } from '../utils/format.js'
+import { avatarFor } from '../utils/avatar.js'
 
 const perPage = 9
 const columns = ['Todo', 'In Progress', 'Review', 'Done']
@@ -90,7 +91,7 @@ export default function Tasks() {
     if (Object.keys(v).length) return
 
     const projectName = mockProjects.find((p) => p.id === form.projectId)?.name || 'Unknown'
-    const assigneeAvatar = 'https://i.pravatar.cc/100?img=32'
+    const assigneeAvatar = avatarFor(form.assignee || 'Alex Morgan')
 
     if (editing) {
       setTasks((prev) => prev.map((t) => (t.id === editing.id ? { ...t, ...form, projectName } : t)))
@@ -238,7 +239,7 @@ export default function Tasks() {
             </div>
             <p style={{ margin: 0, color: 'var(--color-text-2)', fontSize: 13, lineHeight: 1.7 }}>{detail.description}</p>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <img src={detail.assigneeAvatar} alt={detail.assignee} width={24} height={24} style={{ borderRadius: '50%' }} />
+              <img src={detail.assigneeAvatar} alt="" width={24} height={24} style={{ borderRadius: '50%' }} />
               <span style={{ fontWeight: 600, fontSize: 13 }}>{detail.assignee}</span>
             </div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>{detail.tags?.map((tag) => <span key={tag} className="badge badge-neutral">{tag}</span>)}</div>
